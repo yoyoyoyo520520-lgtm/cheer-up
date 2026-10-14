@@ -1,6 +1,475 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>上班辛苦了 ❤️</title><style>*{box-sizing:border-box}body{margin:0;background:#20172b;font-family:system-ui,'Noto Sans TC',sans-serif;color:white}.wrap{max-width:950px;margin:auto;min-height:100vh;background:linear-gradient(140deg,#65436c,#33223e 70%);padding:22px 18px 30px;text-align:center}.hero{position:relative;max-width:620px;margin:auto}.hero img{display:block;width:100%;max-height:490px;object-fit:contain;border-radius:24px;box-shadow:0 15px 40px #180d2780}h1{font-size:clamp(32px,7vw,55px);margin:18px 0 5px;color:#ffe4f1;text-shadow:2px 3px #b9467e}p{line-height:1.7}.subtitle{color:#ffe5ee}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px auto;max-width:760px}button{border:0;border-radius:19px;padding:19px 8px;color:white;font-weight:800;font-size:clamp(14px,3vw,20px);cursor:pointer;box-shadow:0 7px 0 #170e2440}button:disabled{opacity:.6;cursor:wait}.b1{background:#4d91f4}.b2{background:#f6a344}.b3{background:#f45e86}.response{min-height:75px;background:#ffffff19;border-radius:20px;padding:16px;max-width:650px;margin:10px auto;line-height:1.8}.sign{text-align:right;color:#ffc3db;font-size:21px;margin:25px 8px 0}.note{font-size:12px;color:#e5cddf}@media(max-width:480px){.choices{gap:7px}button{padding:14px 3px}.wrap{padding:14px 10px}}</style></head><body><main class="wrap"><h1>上班辛苦了！❤️</h1><p class="subtitle">今天也很努力了！不管現在多忙，你都已經很棒了 ✨</p><div class="hero"><img src="photo.png" alt="給你的一張加油照片"></div><h2>現在的你是什麼狀態呢？</h2><div class="choices"><button class="b1" onclick="vote('還在上班')">💻<br>還在上班</button><button class="b2" onclick="vote('準備下班')">☕<br>準備下班</button><button class="b3" onclick="vote('下班了')">🎉<br>下班了</button></div><div id="response" class="response" aria-live="polite">選一個狀態，我有話想跟你說 💕</div><p class="sign">融關心您～ ❤️</p></main><script>
-// 部署後，把下方網址替換成你部署的 Google Apps Script 網頁應用程式網址
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwC_RmkQWsQQAsxmaoDo92jKf2wuVIa2LbWZBYJQWAqFVj9ZxpLAt_UwZTeWiAkaTw3ZA/exec';
-const messages={'還在上班':'💪 辛苦了！再忙也要記得喝水、休息一下，你真的很棒 ❤️','準備下班':'☕ 快自由啦！再一下下，今天的辛苦都值得被好好犒賞 ✨','下班了':'🎉 恭喜下班！今天辛苦了，接下來要好好放鬆喔 💗'};
-async function vote(choice){const el=document.getElementById('response');if(!SCRIPT_URL.startsWith('https://')){el.textContent='網站尚未設定回覆接收網址，請先完成 README 的設定。';return;}document.querySelectorAll('button').forEach(b=>b.disabled=true);el.textContent='正在送出你的回覆…';try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({choice})});el.textContent=messages[choice]+'（已送出，請以試算表確認紀錄）';}catch(e){el.textContent='送出時發生網路問題，請稍後再試。';}finally{document.querySelectorAll('button').forEach(b=>b.disabled=false)}}
-</script></body></html>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbf5ed">
+  <meta name="description" content="忙了一整天嗎？選個狀態，收下今天的一張加油小卡。">
+  <title>嘿，今天辛苦了！｜融的小小關心所</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,600,40,1;1,9..144,600,40,1&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper:#fbf5ed; --paper2:#f6e9db; --ink:#281f26; --muted:#77666c; --red:#de5d68;
+      --red-dark:#b93e4e; --yellow:#ffca76; --purple:#c7b2ee; --mint:#cae9dc; --white:#fffdf9;
+      --line:rgba(49,31,38,.18); --shade:rgba(81,45,45,.12); --ease:cubic-bezier(.23,1,.32,1);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans','Noto Sans TC',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;z-index:10;pointer-events:none;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.21'/%3E%3C/svg%3E")}
+    button,textarea{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--red-dark);outline-offset:4px}
+    a{color:inherit}
+    ::selection{background:var(--yellow);color:var(--ink)}
+    .container{width:min(1160px,calc(100% - 68px));margin-inline:auto}
+    .site-header{position:relative;z-index:2;border-bottom:1px solid var(--line)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-size:15px;display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900;letter-spacing:.05em}
+    .brand-mark{height:40px;width:40px;background:var(--red);display:grid;place-items:center;transform:rotate(-12deg);border-radius:12px 9px 13px 10px;box-shadow:3px 3px 0 var(--ink);font-size:24px;color:white}
+    .nav-right{display:flex;align-items:center;gap:26px;font-size:11px;font-weight:800;letter-spacing:.14em}
+    .nav-status{display:flex;align-items:center;gap:8px}
+    .live-dot{width:8px;height:8px;background:var(--red);border-radius:50%;box-shadow:0 0 0 4px #de5d681f;animation:blink 2s infinite}
+    .nav-link{text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px}
+    .marquee{background:var(--yellow);border-bottom:1.5px solid var(--ink);overflow:hidden;white-space:nowrap;height:35px;display:flex;align-items:center}
+    .marquee-track{display:flex;flex-shrink:0;gap:28px;animation:slide 28s linear infinite;font-size:10px;font-weight:800;letter-spacing:.15em}
+    .marquee-track span{display:inline-block}
+    .marquee-track b{color:#9e4054;font-size:17px;vertical-align:middle}
+    .hero{position:relative;padding:87px 0 108px;isolation:isolate}
+    .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(350px,.93fr);gap:55px;align-items:center}
+    .eyebrow{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;display:flex;gap:10px;align-items:center}
+    .eyebrow .mini-line{width:33px;height:1px;background:currentColor}
+    .hero-copy{position:relative;z-index:2;padding-bottom:19px}
+    .hero-title{font-size:clamp(56px,7.2vw,106px);font-weight:900;line-height:1.18;letter-spacing:-.085em;margin:30px 0 20px}
+    .hero-title .hi{display:inline-block;position:relative;transform:rotate(-3deg);color:var(--red)}
+    .hero-title .hi::after{content:"";position:absolute;bottom:-5px;left:4px;width:102%;height:13px;border-radius:50%;border-top:5px solid var(--red);transform:rotate(-4deg)}
+    .hero-title .end{font-size:.71em;letter-spacing:-.07em;white-space:nowrap}
+    .hero-lead{max-width:475px;font-size:clamp(15px,1.8vw,17px);font-weight:500;line-height:2.0;color:#5c4a4f;margin:30px 0 29px}
+    .hero-actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .primary-link{display:inline-flex;gap:30px;align-items:center;justify-content:space-between;background:var(--ink);color:var(--white);text-decoration:none;padding:18px 19px 18px 25px;border-radius:99px;font-weight:800;font-size:14px;box-shadow:5px 5px 0 var(--yellow);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+    .primary-link:hover{transform:translateY(-4px);box-shadow:7px 9px 0 var(--yellow)}
+    .round-arrow{background:var(--yellow);color:var(--ink);border-radius:50%;width:29px;height:29px;display:grid;place-items:center;font-size:20px;line-height:1}
+    .whisper{border:0;background:none;font-size:13px;font-weight:800;display:inline-flex;align-items:center;gap:7px;text-decoration:underline;text-decoration-style:wavy;text-decoration-color:var(--red);text-underline-offset:7px;padding:13px 4px;color:var(--ink)}
+    .handwritten{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600}
+    .vertical-note{position:absolute;bottom:5px;left:-37px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:800;letter-spacing:.22em;opacity:.53}
+    .hero-photo-stage{position:relative;min-height:525px;display:flex;align-items:center;justify-content:center}
+    .blob{position:absolute;width:460px;height:440px;right:-31px;top:47px;background:var(--purple);border-radius:50% 48% 48% 52% / 45% 60% 44% 58%;transform:rotate(-17deg);z-index:-1}
+    .photo-frame{width:min(100%,405px);padding:11px 11px 17px;background:#fffefa;box-shadow:0 20px 46px #60474835,8px 9px 0 #3c272c;transform:rotate(5deg);position:relative;transition:transform .5s var(--ease)}
+    .photo-frame:hover{transform:rotate(1deg) scale(1.015)}
+    .photo-frame img{display:block;width:100%;height:auto;aspect-ratio:412/416;object-fit:cover;background:#3a2238}
+    .photo-bottom{display:flex;align-items:center;justify-content:space-between;padding:15px 9px 0;color:var(--ink);font-size:11px;letter-spacing:.06em;font-weight:800}
+    .photo-bottom em{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;letter-spacing:-.04em}
+    .tape{position:absolute;width:112px;height:37px;background:#f6e3b5bd;top:-19px;left:50%;transform:translateX(-50%) rotate(-7deg);backdrop-filter:blur(2px);clip-path:polygon(2% 0,100% 5%,97% 100%,0 94%)}
+    .circle-stamp{position:absolute;z-index:1;top:27px;right:-16px;width:118px;height:118px;background:var(--red);border:2px solid var(--ink);border-radius:50%;color:white;display:flex;align-items:center;justify-content:center;flex-direction:column;transform:rotate(15deg);box-shadow:5px 5px 0 var(--ink);text-align:center;font-weight:900;font-size:15px;line-height:1.3}
+    .circle-stamp small{font-size:10px;letter-spacing:.13em;margin-bottom:3px}
+    .photo-doodle{position:absolute;bottom:6px;left:-13px;color:var(--red);font-size:84px;line-height:1;transform:rotate(-19deg);font-family:Georgia,serif;filter:drop-shadow(3px 4px 0 var(--ink))}
+    .pink-star{position:absolute;right:-16px;bottom:42px;color:var(--red);font-size:56px;transform:rotate(16deg);animation:float 4s ease-in-out infinite}
+    .hero-scribble{position:absolute;left:35%;bottom:38px;font-size:12px;font-weight:700;letter-spacing:.08em;transform:rotate(-5deg);color:#a15a65}
+    .hero-scribble::before{content:'↖';font-size:33px;position:absolute;top:-31px;left:5px}
+    .line-break{border:0;border-top:1.5px solid var(--ink);margin:0}
+    .checkin{background:var(--paper2);padding:100px 0 120px;position:relative;overflow:hidden}
+    .checkin::before{content:"";position:absolute;top:-30px;right:-55px;width:290px;height:290px;border:1.5px solid #dca9b4;border-radius:50%;box-shadow:0 0 0 32px #dca9b420,0 0 0 64px #dca9b417}
+    .section-top{display:flex;gap:28px;align-items:end;justify-content:space-between;margin-bottom:48px;position:relative;z-index:1}
+    .section-num{display:flex;align-items:center;gap:10px;color:#995460;letter-spacing:.16em;font-size:11px;font-weight:900}
+    .section-num::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--red);display:inline-block;box-shadow:3px 3px 0 var(--ink)}
+    .section-title{font-size:clamp(31px,4.3vw,55px);line-height:1.3;letter-spacing:-.055em;margin:15px 0 0;font-weight:900}
+    .section-top p{max-width:245px;color:#746166;line-height:1.9;font-size:13px;font-weight:600;margin:0 0 5px}
+    .mood-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+    .mood-card{position:relative;text-align:left;color:var(--ink);border:1.5px solid var(--ink);border-radius:18px;min-height:247px;padding:23px 25px 21px;box-shadow:6px 7px 0 var(--ink);transition:transform .3s var(--ease),box-shadow .3s var(--ease),filter .3s;overflow:hidden;isolation:isolate}
+    .mood-card:hover{transform:translate(-2px,-7px) rotate(0deg)!important;box-shadow:8px 12px 0 var(--ink)}
+    .mood-card:active{transform:translate(2px,2px)!important;box-shadow:2px 3px 0 var(--ink)}
+    .mood-card[aria-pressed="true"]{outline:4px solid var(--red-dark);outline-offset:5px;transform:rotate(0deg) translateY(-6px)!important;box-shadow:7px 13px 0 var(--ink)}
+    .mood-card[aria-pressed="true"]::after{content:"✓";position:absolute;top:11px;right:13px;background:var(--ink);color:white;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;font-weight:900}
+    .mood-one{background:var(--purple);transform:rotate(-2.2deg)}
+    .mood-two{background:var(--yellow);transform:rotate(1.9deg)}
+    .mood-three{background:var(--mint);transform:rotate(-1.4deg)}
+    .mood-id{font-size:11px;font-weight:900;letter-spacing:.18em;display:flex;justify-content:space-between}
+    .mood-emoji{display:block;font-size:52px;filter:drop-shadow(2px 3px 0 #0000001a);margin:17px 0 3px;transition:transform .4s var(--ease)}
+    .mood-card:hover .mood-emoji{transform:rotate(-12deg) scale(1.2)}
+    .mood-name{display:block;font-size:29px;font-weight:900;letter-spacing:-.05em}
+    .mood-caption{display:block;font-size:12px;font-weight:700;color:#574650;margin-top:7px}
+    .mood-corner{position:absolute;bottom:5px;right:16px;font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:46px;opacity:.16;transform:rotate(-15deg)}
+    .little-instruction{display:flex;justify-content:center;align-items:center;gap:14px;font-size:12px;letter-spacing:.08em;color:#896970;font-weight:800;margin:27px 0 0}
+    .little-instruction::before,.little-instruction::after{content:"";width:38px;height:1px;background:#bda6a4}
+    .letter-stage{max-width:840px;margin:46px auto 0;position:relative}
+    .empty-letter[hidden]{display:none}
+    .empty-letter{border:1.5px dashed #b99897;border-radius:22px;padding:32px;text-align:center;color:#846d73;font-size:13px;font-weight:700;line-height:1.9;min-height:112px;display:grid;place-items:center}
+    .letter{display:none;transform-origin:top;animation:unfold .6s var(--ease) both}
+    .letter.show{display:block}
+    .letter-card{position:relative;background:#fffdf8;border:1.5px solid var(--ink);border-radius:17px;padding:40px clamp(22px,5.5vw,56px);box-shadow:9px 11px 0 #e2c2b9;overflow:hidden}
+    .letter-card::before{content:"";position:absolute;left:0;top:0;width:100%;height:12px;background:repeating-linear-gradient(90deg,var(--red) 0 23px,#fff4f2 23px 46px)}
+    .letter-kicker{font-size:11px;letter-spacing:.17em;font-weight:900;color:var(--red-dark)}
+    .letter-greeting{font-size:clamp(26px,3.2vw,37px);line-height:1.35;letter-spacing:-.05em;margin:19px 0;font-weight:900}
+    .letter-body{font-size:clamp(14px,1.8vw,16px);line-height:2.1;color:#5e4e53;max-width:610px;margin:0}
+    .letter-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px dashed #d3c0ba;margin-top:22px;padding-top:18px;font-size:12px;font-weight:800;color:#a75a68}
+    .letter-footer .signature{font-family:'Fraunces',Georgia,serif;font-size:19px;font-style:italic;color:var(--ink)}
+    .note-area{background:#fffdf8;margin-top:24px;padding:27px 30px 30px;border:1.5px solid var(--line);border-radius:18px}
+    .note-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
+    .note-label{font-size:15px;font-weight:900}
+    .optional{font-size:11px;font-weight:700;color:#aa858c}
+    .note-input{width:100%;resize:vertical;min-height:82px;max-height:170px;border-radius:12px;border:1.5px solid #dcc9c3;background:#fffaf2;padding:15px 17px;outline:none;font-size:14px;line-height:1.8;color:var(--ink)}
+    .note-input::placeholder{color:#ab999d}
+    .note-counter{text-align:right;color:#968086;font-size:11px;font-weight:800;margin-top:7px}
+    .send-row{display:flex;align-items:center;justify-content:flex-end;gap:23px;margin-top:19px;flex-wrap:wrap}
+    .send-button{display:flex;align-items:center;justify-content:center;gap:20px;border:0;border-radius:100px;background:var(--red);color:white;padding:17px 25px;font-weight:900;box-shadow:4px 5px 0 var(--ink);transition:transform .2s var(--ease),box-shadow .2s var(--ease);min-width:200px}
+    .send-button:hover:not(:disabled){transform:translateY(-3px);box-shadow:5px 8px 0 var(--ink)}
+    .send-button:disabled{opacity:.7;cursor:wait}
+    .send-button svg{width:18px;height:18px}
+    .send-button.loading svg{animation:spin .8s linear infinite}
+    .submit-info{margin-top:17px;min-height:30px;line-height:1.6;font-size:13px;font-weight:800;color:var(--red-dark)}
+    .submit-info.ok{color:#287255}.submit-info.error{color:#ac3346}
+    .receipt{display:none;margin-top:22px;background:var(--mint);border:1.5px solid var(--ink);border-radius:19px;padding:32px;box-shadow:7px 8px 0 var(--ink);animation:unfold .5s var(--ease) both}
+    .receipt.show{display:block}
+    .receipt-top{font-size:11px;letter-spacing:.18em;font-weight:900;color:#416955}
+    .receipt h3{font-size:clamp(24px,4vw,37px);margin:9px 0 8px;letter-spacing:-.05em}
+    .receipt p{margin:0;color:#445a51;line-height:1.85;font-weight:600}
+    .receipt-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px;border-top:1px dashed #7da994;padding-top:17px}
+    .receipt-time{font-size:12px;color:#486a58;font-weight:800}
+    .again-button{background:none;border:none;padding:8px 0;font-weight:900;color:#234738;text-decoration:underline;text-underline-offset:4px}
+    .tiny-surprise{padding:100px 0 107px;position:relative}
+    .surprise-grid{display:grid;grid-template-columns:.95fr 1fr;gap:75px;align-items:center}
+    .surprise-display{position:relative;min-height:340px;background:var(--purple);border:1.5px solid var(--ink);box-shadow:9px 9px 0 var(--ink);border-radius:25px 55px 25px 50px;display:grid;place-items:center;padding:46px;transform:rotate(-2deg)}
+    .surprise-display::before{content:'A LITTLE SOMETHING FOR YOU';position:absolute;top:23px;left:27px;font-weight:900;font-size:10px;letter-spacing:.14em}
+    .surprise-quote{font-size:clamp(22px,3.5vw,36px);font-weight:900;line-height:1.7;text-align:center;letter-spacing:-.045em;max-width:410px;transition:opacity .2s,transform .25s}
+    .surprise-quote.changed{animation:pop .42s var(--ease)}
+    .surprise-display::after{content:'✳';position:absolute;right:-20px;bottom:-48px;font-size:118px;color:var(--yellow);text-shadow:3px 4px 0 var(--ink)}
+    .surprise-copy .section-title{max-width:460px}
+    .surprise-copy p{color:#6b5860;line-height:1.95;font-size:15px;max-width:360px;margin:23px 0}
+    .draw-button{background:transparent;border:1.5px solid var(--ink);border-radius:100px;box-shadow:4px 5px 0 var(--ink);padding:15px 24px;font-size:14px;font-weight:900;transition:transform .2s var(--ease),background .2s}
+    .draw-button:hover{transform:translateY(-3px);background:var(--yellow)}
+    .bottom{background:var(--ink);color:var(--paper);padding:42px 0 47px;position:relative;overflow:hidden}
+    .bottom::after{content:'✳';font-size:270px;position:absolute;right:3%;top:-105px;opacity:.075;transform:rotate(-20deg)}
+    .bottom-inner{display:flex;align-items:end;justify-content:space-between;gap:35px}
+    .bottom-kicker{font-size:11px;letter-spacing:.2em;font-weight:800;color:var(--yellow)}
+    .bottom h2{font-size:clamp(27px,5vw,56px);line-height:1.4;margin:13px 0;letter-spacing:-.06em}
+    .bottom p{color:#d0bcc2;font-size:13px;line-height:1.8;margin:0}
+    .bottom-sign{white-space:nowrap;text-align:right;color:#f4aeb9;font-size:16px;font-weight:900;position:relative;z-index:1}
+    .bottom-sign .big{display:block;font-family:'Fraunces',Georgia,serif;font-size:46px;line-height:1.3;font-style:italic;letter-spacing:-.07em}
+    .float-heart{position:fixed;pointer-events:none;z-index:90;font-size:20px;animation:heartfly 1.4s ease-out forwards;filter:drop-shadow(2px 3px 0 #0002)}
+    .toast{position:fixed;z-index:99;bottom:27px;left:50%;width:max-content;max-width:calc(100vw - 34px);background:var(--ink);color:white;box-shadow:5px 5px 0 var(--red);font-size:13px;font-weight:800;padding:16px 22px;border-radius:12px;line-height:1.6;opacity:0;pointer-events:none;transform:translate(-50%,30px);transition:opacity .3s,transform .3s}
+    .toast.on{opacity:1;transform:translate(-50%,0)}
+    .confetti{position:fixed;top:-40px;z-index:80;pointer-events:none;width:10px;height:20px;animation:fall var(--dur) linear forwards;background:var(--clr);left:var(--left);transform:rotate(var(--rotate))}
+    @keyframes slide{to{transform:translateX(-50%)}}
+    @keyframes blink{50%{opacity:.35}}
+    @keyframes float{50%{transform:translateY(-15px) rotate(28deg)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes unfold{from{opacity:0;transform:translateY(-20px) scale(.975)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes pop{from{opacity:.2;transform:scale(.92) rotate(-3deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+    @keyframes heartfly{0%{opacity:1;transform:translate(0,0) rotate(-15deg) scale(.65)}100%{opacity:0;transform:translate(var(--tx),-180px) rotate(25deg) scale(1.6)}}
+    @keyframes fall{to{top:110vh;transform:translateX(var(--dx)) rotate(650deg)}}
+    @media(max-width:920px){
+      .hero-inner{gap:25px;grid-template-columns:minmax(0,1fr) minmax(290px,.85fr)}
+      .hero{padding:75px 0 86px}.hero-title{font-size:clamp(54px,7vw,79px)}.hero-photo-stage{min-height:425px}.blob{width:340px;height:340px;right:-20px;top:30px}
+      .circle-stamp{right:-16px;top:2px;width:95px;height:95px;font-size:13px}.photo-frame{max-width:315px}.photo-doodle{font-size:65px;bottom:-20px}
+      .mood-card{padding:21px 20px;min-height:223px}.mood-name{font-size:24px}.surprise-grid{gap:45px}
+    }
+    @media(max-width:680px){
+      .container{width:calc(100% - 40px)}.nav{height:65px}.brand{font-size:13px;gap:9px}.brand-mark{height:35px;width:35px;font-size:20px}.nav-right{gap:8px;font-size:9px}.nav-link{display:none}
+      .hero{padding:48px 0 60px}.hero-inner{display:flex;flex-direction:column;gap:39px;align-items:stretch}
+      .hero-copy{padding:0}.eyebrow{font-size:10px}.hero-title{font-size:clamp(59px,12vw,83px);margin:19px 0 0}.hero-title .end{font-size:.7em}.hero-lead{font-size:14px;margin:23px 0 20px}
+      .hero-actions{gap:7px 16px}.primary-link{font-size:13px;padding:13px 14px 13px 19px}.whisper{font-size:12px}
+      .hero-photo-stage{min-height:390px;width:min(100%,410px);align-self:center}.photo-frame{width:min(81%,335px);transform:rotate(4deg)}.blob{width:84%;height:83%;right:28px;top:27px}
+      .circle-stamp{top:7px;right:0}.photo-doodle{left:10px;bottom:0}.pink-star{right:11px;bottom:8px}.hero-scribble{bottom:2px;left:8%;font-size:10px}.vertical-note{display:none}
+      .checkin{padding:69px 0 80px}.section-top{display:block;margin-bottom:30px}.section-top p{max-width:none;margin-top:14px}.section-title{font-size:clamp(29px,7.5vw,42px)}
+      .mood-grid{grid-template-columns:1fr;gap:17px}.mood-card{min-height:121px;display:grid;grid-template-columns:62px 1fr;grid-template-rows:auto auto auto;column-gap:14px;align-content:center;padding:15px 20px;transform:rotate(0deg)!important}
+      .mood-id{grid-column:2;grid-row:1;font-size:9px;justify-content:flex-start}.mood-emoji{grid-column:1;grid-row:1/4;font-size:47px;margin:0;align-self:center}.mood-name{grid-column:2;grid-row:2;font-size:23px;margin-top:2px}.mood-caption{grid-column:2;grid-row:3;margin-top:2px;font-size:11px}.mood-corner{font-size:40px;right:9px;bottom:0}
+      .little-instruction{margin-top:25px}.letter-stage{margin-top:33px}.letter-card{padding:36px 25px 26px}.letter-greeting{font-size:27px}.letter-body{font-size:14px}
+      .note-area{padding:22px 20px}.send-row{display:block}.send-button{margin-top:19px;width:100%}.receipt{padding:23px}
+      .tiny-surprise{padding:70px 0 85px}.surprise-grid{display:flex;flex-direction:column;gap:53px}.surprise-display{width:calc(100% - 20px);min-height:270px;padding:45px 28px}.surprise-quote{font-size:clamp(22px,6vw,31px)}.surprise-copy{align-self:flex-start}
+      .bottom{padding:38px 0}.bottom-inner{display:block}.bottom h2{font-size:33px}.bottom-sign{text-align:left;margin-top:28px}.bottom-sign .big{font-size:36px}
+    }
+    @media(max-width:360px){.container{width:calc(100% - 28px)}.hero-title{font-size:54px}.hero-photo-stage{min-height:330px}.circle-stamp{width:80px;height:80px;font-size:11px}.mood-name{font-size:22px}.letter-card{padding-inline:20px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="回到最上方"><span class="brand-mark">✳</span><span>融的小小關心所</span></a>
+      <div class="nav-right"><span class="nav-status"><span class="live-dot" aria-hidden="true"></span> A LITTLE CHEER</span><span id="todayLabel" aria-label="今天日期"></span><a class="nav-link" href="#checkin">回報近況 ↗</a></div>
+    </div>
+  </header>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>YOU DESERVE A LITTLE BREAK <b>✳</b> 辛苦了，真的。 <b>✳</b> DON'T FORGET TO SMILE <b>✳</b> 今天也要對自己溫柔一點 <b>✳</b></span>
+      <span>YOU DESERVE A LITTLE BREAK <b>✳</b> 辛苦了，真的。 <b>✳</b> DON'T FORGET TO SMILE <b>✳</b> 今天也要對自己溫柔一點 <b>✳</b></span>
+      <span>YOU DESERVE A LITTLE BREAK <b>✳</b> 辛苦了，真的。 <b>✳</b> DON'T FORGET TO SMILE <b>✳</b> 今天也要對自己溫柔一點 <b>✳</b></span>
+      <span>YOU DESERVE A LITTLE BREAK <b>✳</b> 辛苦了，真的。 <b>✳</b> DON'T FORGET TO SMILE <b>✳</b> 今天也要對自己溫柔一點 <b>✳</b></span>
+    </div>
+  </div>
+  <main id="top">
+    <section class="hero container" aria-labelledby="mainTitle">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="mini-line"></span>A LITTLE BOOST FOR YOU · #001</span>
+          <h1 id="mainTitle" class="hero-title"><span class="hi">嘿，</span><br>今天過得<br><span class="end">好嗎？ <span aria-hidden="true">✳</span></span></h1>
+          <p class="hero-lead">知道工作有時候真的很忙，<br>所以做了一個小小的加油站。<br>沒什麼特別任務，就是想說聲辛苦了！<br><strong>現在進度到哪裡啦？</strong></p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#checkin">分享一下今天的進度 <span class="round-arrow" aria-hidden="true">↗</span></a>
+            <button class="whisper" id="heartButton" type="button">點一下領取好心情 <span aria-hidden="true">✳</span></button>
+          </div>
+          <span class="vertical-note">A MOMENT, A LITTLE CHEER —</span>
+        </div>
+        <div class="hero-photo-stage">
+          <div class="blob" aria-hidden="true"></div>
+          <div class="circle-stamp" aria-hidden="true"><small>YOU GOT THIS</small>今天也<br>辛苦了 ✳</div>
+          <figure class="photo-frame">
+            <div class="tape" aria-hidden="true"></div>
+            <img src="photo.png" alt="在報紙牆前拿著手機自拍、比出可愛手勢的照片" width="412" height="416" fetchpriority="high">
+            <figcaption class="photo-bottom"><span>PHOTO NOTE / 01</span><em>a little cheer ✳</em></figcaption>
+          </figure>
+          <span class="photo-doodle" aria-hidden="true">✳</span>
+          <span class="pink-star" aria-hidden="true">✳</span>
+        </div>
+      </div>
+      <div class="hero-scribble" aria-hidden="true">看，這裡有你的一張小照片</div>
+    </section>
+
+    <section id="checkin" class="checkin" aria-labelledby="checkinTitle">
+      <div class="container">
+        <div class="section-top">
+          <div><div class="section-num">01 / A LITTLE CHECK-IN</div><h2 id="checkinTitle" class="section-title">現在的你，<br>是哪一種小宇宙？</h2></div>
+          <p>選一張目前的狀態卡，就會出現不同的加油小紙條。送出前都能重新選擇。</p>
+        </div>
+        <div class="mood-grid" role="group" aria-label="選擇目前的工作狀態">
+          <button type="button" class="mood-card mood-one" data-choice="還在上班" aria-pressed="false"><span class="mood-id">01 / STILL WORKING</span><span class="mood-emoji" aria-hidden="true">💻</span><span class="mood-name">還在上班</span><span class="mood-caption">今天還在努力發光中</span><span class="mood-corner" aria-hidden="true">work</span></button>
+          <button type="button" class="mood-card mood-two" data-choice="準備下班" aria-pressed="false"><span class="mood-id">02 / ALMOST FREE</span><span class="mood-emoji" aria-hidden="true">🧋</span><span class="mood-name">準備下班</span><span class="mood-caption">自由就在轉角了耶</span><span class="mood-corner" aria-hidden="true">soon</span></button>
+          <button type="button" class="mood-card mood-three" data-choice="下班了" aria-pressed="false"><span class="mood-id">03 / OFF DUTY</span><span class="mood-emoji" aria-hidden="true">🌷</span><span class="mood-name">下班了</span><span class="mood-caption">工作告一段落，先放鬆一下</span><span class="mood-corner" aria-hidden="true">yay!</span></button>
+        </div>
+        <div class="little-instruction">TAP A CARD & GET A LITTLE BOOST <span aria-hidden="true">↘</span></div>
+        <div class="letter-stage" id="letterStage">
+          <div id="emptyLetter" class="empty-letter">✉️　今天的加油小卡準備好了，選一個狀態來看看吧。</div>
+          <div id="letter" class="letter" aria-live="polite">
+            <div class="letter-card">
+              <div id="letterKicker" class="letter-kicker">DAILY CHEER / NO. 01</div>
+              <h3 id="letterGreeting" class="letter-greeting"></h3>
+              <p id="letterBody" class="letter-body"></p>
+              <div class="letter-footer"><span>給忙碌的今天，一張小小加油卡。</span><span class="signature">From 融 ✳</span></div>
+            </div>
+            <div class="note-area" id="noteArea">
+              <div class="note-top"><label class="note-label" for="noteInput">有什麼想分享的嗎？</label><span class="optional">選填，不寫也沒關係</span></div>
+              <textarea id="noteInput" class="note-input" maxlength="120" placeholder="例如：終於要下班了，晚餐想吃點好吃的！" aria-describedby="noteHint"></textarea>
+              <div id="noteHint" class="note-counter"><span id="noteCount">0</span> / 120 字</div>
+              <div class="send-row"><button type="button" class="send-button" id="sendButton"><span id="sendLabel">送出近況給融</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></div>
+              <div id="submitInfo" class="submit-info" aria-live="polite" role="status"></div>
+            </div>
+          </div>
+          <div id="receipt" class="receipt" aria-live="polite" role="status">
+            <div class="receipt-top">✓ DELIVERY CONFIRMED / CHECK-IN RECEIVED</div>
+            <h3>收到你的近況啦！🎉</h3>
+            <p>這一筆回覆已經成功記錄。<br>忙了一天辛苦了，接下來也記得好好休息！</p>
+            <div class="receipt-bottom"><span class="receipt-time" id="receiptTime"></span><button type="button" class="again-button" id="againButton">再留一張小紙條 ↗</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tiny-surprise container" aria-labelledby="surpriseTitle">
+      <div class="surprise-grid">
+        <div class="surprise-display" aria-live="polite"><div class="surprise-quote" id="surpriseQuote">「不必每件事都完美，今天也很努力了！」</div></div>
+        <div class="surprise-copy"><div class="section-num">02 / POCKET-SIZED SUNSHINE</div><h2 id="surpriseTitle" class="section-title">再給你一點<br><span class="handwritten" style="color:var(--red)">tiny happiness.</span></h2><p>如果今天有點難，這裡還藏了幾句話。<br>想要的話，可以多抽幾張，不限次數。</p><button type="button" class="draw-button" id="drawButton">✳ 再抽一張今日小紙條</button></div>
+      </div>
+    </section>
+  </main>
+  <footer class="bottom"><div class="container bottom-inner"><div><div class="bottom-kicker">THAT'S ALL. JUST WANTED TO SAY...</div><h2>嘿，今天辛苦了！<br>明天也順順利利 ✳</h2><p>不用每一天都滿分。忙完記得休息，偶爾也要犒賞一下自己。</p></div><div class="bottom-sign">小小下班加油站<span class="big">融關心您～ ❤️</span></div></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    'use strict';
+    // 已預填昨天的網址。重要：更新 Code.gs 後，務必「管理部署作業 → 編輯 → 新版本 → 部署」。
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwC_RmkQWsQQAsxmaoDo92jKf2wuVIa2LbWZBYJQWAqFVj9ZxpLAt_UwZTeWiAkaTw3ZA/exec';
+    const letters = {
+      '還在上班': {
+        kicker:'LETTER 01 / TO THE HARDWORKING YOU',
+        greeting:'還在忙呀？今天也辛苦了！ 💻',
+        body:'忙起來常常一轉眼就過了好幾個小時。記得喝點水，坐久了也起來動一動。手邊事情一件件處理就好，不用急著全部做完。今天也替你加油！'
+      },
+      '準備下班': {
+        kicker:'LETTER 02 / YOU ARE ALMOST THERE',
+        greeting:'快要下班啦！再一下下。 🧋',
+        body:'距離休息時間越來越近了！希望等等收尾順利，回家的路不塞車，晚餐還能吃到想吃的。最後一小段，穩穩完成就好。'
+      },
+      '下班了': {
+        kicker:'LETTER 03 / OFF-DUTY, WELL DONE',
+        greeting:'終於下班啦！辛苦了。 🌷',
+        body:'今天的工作先告一段落啦！有空吃點喜歡的、追個劇，或什麼都不做也很可以。希望今晚可以輕鬆一點，充好電再迎接明天。'
+      }
+    };
+    const fortunes = [
+      '「不必每件事都完美，今天也很努力了！」',
+      '「今天已經很努力了，剩下的交給明天。」',
+      '「偶爾慢下來，也是一種很棒的前進。」',
+      '「今天遇到的小確幸，也值得開心一下。」',
+      '「希望今晚能吃到一頓好吃的晚餐。」',
+      '「今天就先辛苦到這裡吧，記得休息。」',
+      '「忙歸忙，也別忘了讓自己喘口氣。」',
+      '「願你每次下班，都能比上班時更輕鬆一點。」'
+    ];
+    const $ = (id) => document.getElementById(id);
+    const moodButtons = Array.from(document.querySelectorAll('.mood-card'));
+    const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let selectedChoice = '';
+    let isSending = false;
+    let delivered = false;
+    let pendingId = '';
+    let toastTimer;
+
+    $('todayLabel').textContent = new Intl.DateTimeFormat('en-US',{month:'short',day:'2-digit'}).format(new Date()).toUpperCase();
+    const timeFormatter = new Intl.DateTimeFormat('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
+
+    function toast(message){
+      const el = $('toast'); el.textContent = message; el.classList.add('on');
+      clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('on'),2900);
+    }
+    function launchHearts(x,y,n=9){
+      if(!motionOK) return;
+      for(let i=0;i<n;i++){
+        const h=document.createElement('span');h.className='float-heart';
+        h.textContent=['✳','✦','★','☀'][Math.floor(Math.random()*4)];
+        h.style.left=(x+Math.random()*42-21)+'px';h.style.top=(y+Math.random()*25-12)+'px';
+        h.style.color=['#de5d68','#b995e5','#e6a153'][Math.floor(Math.random()*3)];
+        h.style.setProperty('--tx',(Math.random()*150-75)+'px');
+        h.style.animationDelay=(Math.random()*.2)+'s';
+        document.body.append(h);h.addEventListener('animationend',()=>h.remove(),{once:true});
+      }
+    }
+    $('heartButton').addEventListener('click',(e)=>{
+      const r=e.currentTarget.getBoundingClientRect();launchHearts(r.left+r.width/2,r.top+r.height/2,13);
+      toast('今日份好心情 +1 ✳');
+    });
+    moodButtons.forEach((button)=>button.addEventListener('click',()=>{
+      if(isSending) return;
+      if(delivered) resetForm();
+      selectedChoice=button.dataset.choice;
+      pendingId='';
+      moodButtons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+      const content=letters[selectedChoice];
+      $('letterKicker').textContent=content.kicker;
+      $('letterGreeting').textContent=content.greeting;
+      $('letterBody').textContent=content.body;
+      $('emptyLetter').hidden=true;
+      $('letter').classList.remove('show');
+      void $('letter').offsetWidth;
+      $('letter').classList.add('show');
+      $('submitInfo').textContent='';$('submitInfo').className='submit-info';
+      if(motionOK){const r=button.getBoundingClientRect();launchHearts(r.left+r.width/2,r.top+r.height/2,5)}
+      const letterTop=$('letterStage').getBoundingClientRect().top + window.scrollY;
+      if(window.scrollY+window.innerHeight < letterTop+150){
+        setTimeout(()=>$('letterStage').scrollIntoView({behavior:motionOK?'smooth':'auto',block:'center'}),190);
+      }
+    }));
+    $('noteInput').addEventListener('input',()=>{
+      $('noteCount').textContent=Array.from($('noteInput').value).length;
+      if(!isSending) pendingId='';
+      $('submitInfo').textContent='';$('submitInfo').className='submit-info';
+    });
+    function newRequestId(){
+      if(window.crypto && typeof window.crypto.randomUUID==='function')return window.crypto.randomUUID();
+      return Date.now().toString(36)+'_'+Math.random().toString(36).slice(2)+'_'+Math.random().toString(36).slice(2);
+    }
+    // Apps Script 的 ContentService 不可靠地提供瀏覽器可讀的跨網域 POST 回應。
+    // 因此先 POST 寫入，再以 JSONP（僅查詢，不寫入）按隨機 requestId 核對後台是否真的存檔。
+    // 只有取得後台 received:true，畫面才會顯示「收到」。
+    function getConfirmation(requestId){
+      return new Promise((resolve,reject)=>{
+        const callback='__cheerAck_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+        const element=document.createElement('script');
+        let settled=false;
+        const tidy=()=>{clearTimeout(timer);element.remove();try{delete window[callback]}catch(_){window[callback]=undefined}};
+        const finish=(err,data)=>{if(settled)return;settled=true;tidy();if(err)reject(err);else resolve(data)};
+        const timer=setTimeout(()=>finish(new Error('確認連線逾時')),6500);
+        window[callback]=(data)=>finish(null,data);
+        element.onerror=()=>finish(new Error('無法連線至確認服務'));
+        const url=new URL(SCRIPT_URL);
+        url.searchParams.set('action','status');url.searchParams.set('id',requestId);
+        url.searchParams.set('callback',callback);url.searchParams.set('_',Date.now().toString());
+        element.src=url.toString();document.head.appendChild(element);
+      });
+    }
+    const sleep=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
+    async function waitForConfirmation(requestId){
+      for(let attempt=0;attempt<7;attempt++){
+        try{
+          const result=await getConfirmation(requestId);
+          if(result && result.ok===true && result.received===true) return result;
+          if(result && result.ok===false && result.error) throw new Error(result.error);
+        }catch(error){
+          // 連線逾時或短暫錯誤，可繼續重試；保留 requestId 防止重複登記。
+          if(attempt===6) throw error;
+        }
+        await sleep(1000+Math.min(attempt,3)*320);
+      }
+      throw new Error('尚未取得後台確認');
+    }
+    function setSendingState(sending){
+      isSending=sending;$('sendButton').disabled=sending;
+      $('sendButton').classList.toggle('loading',sending);
+      $('sendLabel').textContent=sending?'正在送出近況…':'送出近況給融';
+      $('noteInput').disabled=sending;
+      moodButtons.forEach(b=>b.disabled=sending);
+    }
+    $('sendButton').addEventListener('click',async()=>{
+      if(!selectedChoice || isSending || delivered)return;
+      if(!SCRIPT_URL.startsWith('https://script.google.com/macros/s/')){
+        $('submitInfo').textContent='尚未設定 Google Apps Script 網址，請先完成部署。';
+        $('submitInfo').className='submit-info error';return;
+      }
+      const note=Array.from($('noteInput').value.trim()).slice(0,120).join('');
+      const requestId=pendingId || newRequestId(); pendingId=requestId;
+      $('submitInfo').className='submit-info';
+      $('submitInfo').textContent='正在送出，並向試算表確認是否真的收到…';
+      setSendingState(true);
+      try{
+        // no-cors 的 POST 只能表示請求已送出，不能代表成功寫入。
+        await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({choice:selectedChoice,note,requestId}),cache:'no-store'});
+        $('submitInfo').textContent='已送出請求，正在等待後台收件回條…';
+        const ack=await waitForConfirmation(requestId);
+        delivered=true;
+        $('letter').classList.remove('show');$('emptyLetter').hidden=true;
+        $('receipt').classList.add('show');
+        let receivedTime=new Date(ack.serverTime || Date.now());
+        if(Number.isNaN(receivedTime.getTime()))receivedTime=new Date();
+        $('receiptTime').textContent='確認時間｜'+timeFormatter.format(receivedTime)+'　·　已寫入回覆紀錄';
+        if(motionOK) confetti();
+        $('receipt').scrollIntoView({behavior:motionOK?'smooth':'auto',block:'center'});
+      }catch(error){
+        $('submitInfo').textContent='還沒拿到後台的收件確認。請檢查網路或部署版本，稍後按同一顆按鈕再試一次；不會因相同編號重複記錄。';
+        $('submitInfo').className='submit-info error';
+        console.warn('回覆尚未確認:',error);
+      }finally{setSendingState(false)}
+    });
+    function confetti(){
+      const colors=['#de5d68','#ffca76','#c7b2ee','#cae9dc','#fff6ee'];
+      for(let i=0;i<55;i++){
+        const e=document.createElement('i');e.className='confetti';
+        e.style.setProperty('--left',(Math.random()*100)+'vw');
+        e.style.setProperty('--clr',colors[i%colors.length]);
+        e.style.setProperty('--dx',(Math.random()*300-150)+'px');
+        e.style.setProperty('--dur',(2.2+Math.random()*2.3)+'s');
+        e.style.setProperty('--rotate',(Math.random()*90)+'deg');
+        e.style.animationDelay=(Math.random()*.6)+'s';
+        document.body.appendChild(e);setTimeout(()=>e.remove(),5500);
+      }
+    }
+    function resetForm(){
+      delivered=false;selectedChoice='';pendingId='';
+      $('receipt').classList.remove('show');$('letter').classList.remove('show');
+      $('emptyLetter').hidden=false;$('noteInput').value='';$('noteCount').textContent='0';
+      $('submitInfo').textContent='';$('submitInfo').className='submit-info';
+      moodButtons.forEach(b=>b.setAttribute('aria-pressed','false'));
+    }
+    $('againButton').addEventListener('click',()=>{
+      resetForm();$('checkin').scrollIntoView({behavior:motionOK?'smooth':'auto',block:'start'});
+    });
+    let fortuneIndex=0;
+    $('drawButton').addEventListener('click',()=>{
+      const oldIndex=fortuneIndex;
+      while(fortuneIndex===oldIndex) fortuneIndex=Math.floor(Math.random()*fortunes.length);
+      const element=$('surpriseQuote');element.textContent=fortunes[fortuneIndex];
+      element.classList.remove('changed');void element.offsetWidth;element.classList.add('changed');
+      if(motionOK){const r=$('drawButton').getBoundingClientRect();launchHearts(r.left+r.width/2,r.top,6)}
+    });
+  </script>
+</body>
+</html>
