@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#fbf5ed">
-  <meta name="description" content="給 kk 小朋友的一點關心、一點陽光，還有想慢慢說給你聽的話。">
-  <title>嗨，kk小朋友，今天過的好嗎？｜融的小小關心所</title>
+  <meta name="cheer-version" content="4.0">
+  <meta name="description" content="一起走過的地方，想去的下一站，還有想好好聽你說的每一種心情。">
+  <title>一起走過的路，慢慢變長。｜融的小小關心所</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,600,40,1;1,9..144,600,40,1&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -19,9 +20,9 @@
     html{scroll-behavior:smooth}
     body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans','Noto Sans TC',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
     body::before{content:"";position:fixed;inset:0;z-index:10;pointer-events:none;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.21'/%3E%3C/svg%3E")}
-    button,textarea{font:inherit}
+    button,textarea,input{font:inherit}
     button{cursor:pointer}
-    button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--red-dark);outline-offset:4px}
+    button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--red-dark);outline-offset:4px}
     a{color:inherit}
     ::selection{background:var(--yellow);color:var(--ink)}
     .container{width:min(1160px,calc(100% - 68px));margin-inline:auto}
@@ -56,11 +57,6 @@
     .vertical-note{position:absolute;bottom:5px;left:-37px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:800;letter-spacing:.22em;opacity:.53}
     .hero-photo-stage{position:relative;min-height:525px;display:flex;align-items:center;justify-content:center}
     .blob{position:absolute;width:460px;height:440px;right:-31px;top:47px;background:var(--purple);border-radius:50% 48% 48% 52% / 45% 60% 44% 58%;transform:rotate(-17deg);z-index:-1}
-    .photo-frame{width:min(100%,405px);padding:11px 11px 17px;background:#fffefa;box-shadow:0 20px 46px #60474835,8px 9px 0 #3c272c;transform:rotate(5deg);position:relative;transition:transform .5s var(--ease)}
-    .photo-frame:hover{transform:rotate(1deg) scale(1.015)}
-    .photo-frame img{display:block;width:100%;height:auto;aspect-ratio:412/416;object-fit:cover;background:#3a2238}
-    .photo-bottom{display:flex;align-items:center;justify-content:space-between;padding:15px 9px 0;color:var(--ink);font-size:11px;letter-spacing:.06em;font-weight:800}
-    .photo-bottom em{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;letter-spacing:-.04em}
     .tape{position:absolute;width:112px;height:37px;background:#f6e3b5bd;top:-19px;left:50%;transform:translateX(-50%) rotate(-7deg);backdrop-filter:blur(2px);clip-path:polygon(2% 0,100% 5%,97% 100%,0 94%)}
     .circle-stamp{position:absolute;z-index:1;top:27px;right:-16px;width:118px;height:118px;background:var(--red);border:2px solid var(--ink);border-radius:50%;color:white;display:flex;align-items:center;justify-content:center;flex-direction:column;transform:rotate(15deg);box-shadow:5px 5px 0 var(--ink);text-align:center;font-weight:900;font-size:15px;line-height:1.3}
     .circle-stamp small{font-size:10px;letter-spacing:.13em;margin-bottom:3px}
@@ -216,25 +212,6 @@
     .care-note p{font-size:13px;line-height:2;color:#5d4c52;margin:0}
     .care-sign{display:block;font-size:11px;font-weight:800;color:#9b495b;margin-top:20px}
     .care-icon{position:absolute;top:17px;right:20px;font-family:Georgia,serif;font-size:34px;color:#a74e60}
-    .photo-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:108px 0 44px}
-    .photo-eyebrow{font-size:10px;letter-spacing:.14em;font-weight:800;color:#925664}
-    .photo-heading h3{font-size:clamp(26px,3.5vw,40px);margin:14px 0 0;letter-spacing:-.05em}
-    .photo-heading>.handwritten{font-size:22px;color:#a85769;transform:rotate(-5deg);margin-bottom:6px}
-    .memory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:29px;padding:12px 6px}
-    .memory-photo{margin:0;position:relative;background:#fffefa;padding:10px 10px 22px;box-shadow:5px 7px 0 #d8c6bd,0 12px 23px #63414917;border:1px solid #e2d7cd;transition:transform .4s var(--ease)}
-    .memory-tea{transform:rotate(-3deg)}.memory-sunshine{transform:rotate(2deg) translateY(17px)}.memory-blue{transform:rotate(-2deg)}
-    .memory-photo:hover{transform:rotate(0deg) translateY(-5px)}
-    .memory-tape{position:absolute;z-index:1;top:-14px;left:calc(50% - 40px);width:80px;height:29px;background:#ebd7a8ba;transform:rotate(-8deg);clip-path:polygon(0 5%,96% 0,100% 92%,2% 100%)}
-    .memory-sunshine .memory-tape{background:#c9b8e8b8;transform:rotate(5deg)}
-    .memory-blue .memory-tape{background:#c6e1d2bd;transform:rotate(-5deg)}
-    .memory-image{overflow:hidden;aspect-ratio:4/5;background:#e5ddd4}
-    .memory-image img{display:block;width:100%;height:100%;object-fit:cover}
-    .memory-tea img{object-position:50% 36%}.memory-sunshine img{object-position:50% 45%}.memory-blue img{object-position:50% 52%}
-    .memory-photo figcaption{padding:20px 6px 0;position:relative}
-    .memory-id{display:block;font-size:8px;letter-spacing:.09em;font-weight:800;color:#877079}
-    .memory-photo strong{display:block;font-size:15px;letter-spacing:-.04em;margin:13px 0 8px;font-weight:900}
-    .memory-photo figcaption>span:last-of-type{font-size:11px;line-height:1.8;color:#77666c;display:block}
-    .memory-photo i{position:absolute;right:1px;top:12px;font:25px Georgia,serif;color:var(--red)}
     .closing-note{margin:85px auto 0;text-align:center;font-size:16px;line-height:2.1;color:#725762}
     .closing-note strong{color:var(--ink);font-weight:800}
     .closing-note>span{display:block;font-size:13px;color:#a15465;margin-top:13px}
@@ -243,7 +220,6 @@
       .hero-title{font-size:clamp(52px,7vw,72px)}.mood-name{font-size:24px}
       .care-grid{gap:18px}.care-note{padding:26px 19px}.care-note h4{font-size:18px}.care-note p{font-size:12px}
       .care-heading>span:first-child{display:none}.memory-grid{gap:19px}.memory-photo strong{font-size:13px}.memory-photo figcaption>span:last-of-type{font-size:10px}
-      .memory-photo figcaption{padding-inline:2px}.memory-photo i{font-size:21px}
     }
     @media(max-width:680px){
       .hero-title{font-size:clamp(54px,13vw,79px);margin-bottom:0}.hero-title .nickname{font-size:.96em}.hero-title .end{font-size:.59em;margin-top:13px}
@@ -256,22 +232,166 @@
       .tiny-surprise{padding:68px 0 65px}.surprise-grid{gap:43px;flex-direction:column-reverse;align-items:stretch}.surprise-display{width:calc(100% - 12px);margin-inline:auto;min-height:337px;padding:64px 25px 30px;border-radius:22px 37px 23px 35px}.surprise-display::after{font-size:88px;right:-10px;bottom:-37px}.surprise-quote{font-size:23px;line-height:1.9}.surprise-copy p{font-size:13px;line-height:2}.surprise-sign{font-size:10px;gap:8px}.surprise-card-top{left:23px;right:23px;font-size:10px}
       .care-heading{margin-top:80px;margin-bottom:26px}.care-heading h3{font-size:21px}.care-heading>span:last-child{font-size:27px}
       .care-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px}.care-note{padding:21px 14px 18px;min-height:265px}.care-kicker{font-size:7px;letter-spacing:.04em}.care-icon{font-size:25px;top:12px;right:12px}.care-note h4{font-size:17px;line-height:1.5;margin-top:29px;letter-spacing:-.06em}.care-note p{font-size:11px;line-height:1.95}.care-note p br{display:none}.care-sign{font-size:10px;margin-top:17px}
-      .photo-heading{margin:77px 0 35px;display:block}.photo-eyebrow{font-size:9px}.photo-heading h3{font-size:28px}.photo-heading>.handwritten{display:block;font-size:18px;margin-top:19px;transform:rotate(-3deg)}
-      .memory-grid{grid-template-columns:1fr;gap:40px;width:calc(100% - 24px);max-width:370px;margin-inline:auto;padding:12px 0}
-      .memory-photo{padding:10px 10px 24px}.memory-sunshine{transform:rotate(2deg)}.memory-photo figcaption{padding:22px 10px 0}.memory-id{font-size:9px}.memory-photo strong{font-size:16px}.memory-photo figcaption>span:last-of-type{font-size:12px}.memory-photo i{font-size:28px;right:10px}.memory-image{aspect-ratio:4/4.8}
       .closing-note{font-size:14px;line-height:2.1;margin-top:53px}.closing-note strong{display:block}.bottom h2{font-size:29px}
     }
     @media(max-width:360px){.hero-title{font-size:53px}.mood-name{font-size:19px}.mood-card{padding-inline:12px}.care-note h4{font-size:16px}.care-note p{font-size:10.5px}.care-kicker{font-size:6.6px}.surprise-quote{font-size:21px}}
     @media(min-width:921px){.blob{right:10px;width:430px;height:410px}}
     @media(min-width:681px) and (max-width:920px){.blob{right:8px;width:310px;height:310px}}
     .letter-footer .signature{white-space:nowrap}
+/* Standalone section after .tiny-surprise. The dated image stays fully visible. */
+.journey-section{position:relative;padding:83px 0 91px;background:#f3e9df;border-top:1px solid #d9c4ba;overflow:hidden}
+.journey-section::before{content:"";position:absolute;width:350px;height:350px;right:-140px;top:-180px;border:1px solid #d4b7bd;border-radius:50%;box-shadow:0 0 0 33px #d8c3cf30,0 0 0 68px #d8c3cf1a;pointer-events:none}
+.journey-heading{display:flex;align-items:end;justify-content:space-between;gap:35px;position:relative;z-index:1;margin-bottom:43px}
+.journey-heading .section-title{font-size:clamp(31px,4.2vw,52px);line-height:1.35}
+.journey-heading>p{margin:0 23px 6px 0;max-width:275px;font-size:14px;font-weight:600;line-height:2;color:#78616b}
+.journey-map{position:relative;padding:4px 34px 10px}
+.journey-route{position:absolute;z-index:0;left:2%;top:0;width:96%;height:87%;overflow:visible;pointer-events:none}
+.journey-route path{fill:none;stroke:#ba8996;stroke-width:2;stroke-linecap:round;stroke-dasharray:5 10;vector-effect:non-scaling-stroke}
+.journey-doodle{position:absolute;z-index:0;pointer-events:none;font-family:Georgia,serif}
+.journey-doodle-sun{left:48%;top:8%;font-size:67px;color:#dca65d;transform:rotate(-13deg)}
+.journey-doodle-star{right:1%;bottom:13%;font-size:62px;color:#bca5d1;transform:rotate(13deg)}
+.journey-stops{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.83fr);gap:84px;align-items:center;margin:0;padding:0;position:relative;z-index:1}
+.journey-stop{min-width:0}
+.journey-stop-label{display:flex;align-items:center;gap:11px;margin:0 0 22px 7px;font-size:10px;letter-spacing:.13em;font-weight:900;color:#98586a}
+.journey-dot{flex:0 0 auto;width:15px;height:15px;background:var(--red);border:1.5px solid var(--ink);border-radius:50%;box-shadow:3px 3px 0 #dcc3bb}
+.journey-dot-open{background:#fff9ee;border-color:#a66a7b;box-shadow:3px 3px 0 #e3cfd6}
+.journey-postcard{position:relative;max-width:436px;background:#fffdf7;border:1px solid #d1bbb0;box-shadow:6px 8px 0 #cfb9ab66,0 15px 30px #82605212;padding:20px 16px 25px;transform:rotate(-2deg)}
+.journey-tape{position:absolute;z-index:2;top:-16px;left:calc(50% - 49px);width:98px;height:33px;background:#d1bddfa6;clip-path:polygon(0 4%,98% 0,100% 91%,3% 100%);transform:rotate(4deg)}
+.journey-postcard-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:2px 3px 15px;font-size:11px;font-weight:900;letter-spacing:.09em}
+.journey-postcard-top time{color:#70535c;white-space:nowrap}
+.journey-postcard-top time>span{font-size:9px;letter-spacing:.12em;color:#9a7681;margin-left:5px}
+.journey-place{background:#ffdb7d;border:1px solid #73635b;color:#354460;padding:5px 9px;letter-spacing:.15em;font-size:10px;transform:rotate(5deg);box-shadow:2px 2px 0 #d8c9b8}
+.journey-photo{margin:0}
+.journey-photo img{display:block;width:100%;height:auto;aspect-ratio:1108/1477;object-fit:contain;object-position:center bottom;background:#e6dfd4}
+.journey-photo figcaption{position:relative;padding:20px 8px 0}
+.journey-photo-note{display:block;font-size:17px;letter-spacing:-.03em;color:#ac6071}
+.journey-photo h3{font-size:21px;line-height:1.55;letter-spacing:-.045em;margin:12px 0 9px;font-weight:900}
+.journey-photo p{font-size:13px;line-height:1.95;color:#765d67;margin:0}
+.journey-postcard-heart{position:absolute;right:20px;bottom:25px;font:37px Georgia,serif;color:var(--red);transform:rotate(12deg)}
+.journey-stop-next{position:relative;padding-top:45px;max-width:375px}
+.journey-stop-next .journey-stop-label{margin-bottom:19px}
+.journey-next-note{position:relative;background:#eee4f3;border:1px solid #c2a9c3;border-radius:2px 25px 3px 3px;padding:33px 29px 29px;box-shadow:5px 6px 0 #d6c2d24d;transform:rotate(2deg)}
+.journey-next-note::before{content:"";position:absolute;top:0;right:0;width:23px;height:23px;background:linear-gradient(45deg,#cab5d3 0 49%,#f3e9df 51%);border-radius:0 24px 0 1px}
+.journey-next-kicker{font-size:10px;letter-spacing:.08em;color:#8b647c;font-weight:800}
+.journey-next-note h3{font-size:clamp(26px,3vw,35px);line-height:1.5;letter-spacing:-.055em;margin:20px 0 17px;font-weight:900}
+.journey-next-note p{font-size:13px;line-height:2;color:#765f70;margin:0}
+.journey-next-sign{display:block;font-size:17px;color:#a75c74;margin-top:25px;letter-spacing:-.03em}
+.journey-continuation{display:flex;align-items:center;gap:12px;margin:27px 0 0 34%;width:65%;transform:rotate(-11deg);color:#aa768a}
+.journey-continuation>span{flex:1;border-top:2px dashed #b68d9a}
+.journey-continuation>b{font-size:29px;line-height:1;font-weight:400}
+@media(max-width:920px){
+  .journey-section{padding:72px 0 77px}.journey-map{padding-inline:13px}.journey-stops{gap:48px;grid-template-columns:minmax(0,1fr) minmax(0,.83fr)}
+  .journey-heading>p{font-size:13px;margin-right:0}.journey-photo h3{font-size:18px}.journey-photo p{font-size:12px}.journey-photo-note{font-size:15px}
+  .journey-next-note{padding:28px 22px 25px}.journey-next-note p{font-size:12px}.journey-next-note h3{font-size:28px}.journey-next-sign{font-size:15px}.journey-doodle-sun{font-size:51px}
+}
+@media(max-width:680px){
+  .journey-section{padding:64px 0 69px}.journey-section::before{width:260px;height:260px;top:-160px;right:-130px}
+  .journey-heading{display:block;margin-bottom:34px}.journey-heading .section-title{font-size:clamp(30px,7.5vw,41px)}.journey-heading>p{margin:20px 0 0;font-size:13px;line-height:1.95}
+  .journey-map{padding:0 3px 0 20px}.journey-route{display:none}.journey-doodle-sun{left:auto;right:-3px;top:-65px;font-size:45px}.journey-doodle-star{right:4%;bottom:0;font-size:38px}
+  .journey-stops{display:block;padding-left:17px;border-left:2px dashed #c39aa5;margin-left:1px}
+  .journey-stop-label{position:relative;font-size:8px;letter-spacing:.12em;margin-left:0;margin-bottom:23px;gap:0}
+  .journey-dot{position:absolute;left:-26px;top:50%;transform:translateY(-50%);width:15px;height:15px;box-shadow:0 0 0 5px #f3e9df}
+  .journey-postcard{width:calc(100% - 6px);max-width:385px;margin-left:3px;padding:17px 11px 22px;transform:rotate(-1.5deg)}
+  .journey-postcard-top{font-size:9px;letter-spacing:.05em;margin:2px 2px 12px}.journey-postcard-top time>span{font-size:8px;margin-left:4px}.journey-place{font-size:9px;padding:4px 7px}
+  .journey-photo figcaption{padding:18px 6px 0}.journey-photo-note{font-size:15px}.journey-photo h3{font-size:19px;margin-top:10px}.journey-photo p{font-size:12px;line-height:1.9}
+  .journey-postcard-heart{font-size:29px;right:15px;bottom:24px}
+  .journey-stop-next{padding-top:49px;max-width:385px;padding-bottom:19px}.journey-stop-next .journey-stop-label{margin-bottom:21px}
+  .journey-next-note{padding:29px 21px 25px;margin-left:3px;margin-right:5px;transform:rotate(1.5deg)}.journey-next-note h3{font-size:29px;margin:18px 0 14px}.journey-next-note p{font-size:12px;line-height:2}.journey-next-kicker{font-size:9px}.journey-next-sign{font-size:16px;margin-top:21px}
+  .journey-continuation{margin:25px 4px 0 25%;width:63%}
+}
+@media(max-width:360px){
+  .journey-map{padding-left:12px}.journey-stops{padding-left:15px}.journey-dot{left:-24px}.journey-photo h3{font-size:17px}.journey-photo p{font-size:11px}.journey-photo-note{font-size:13px}.journey-next-note h3{font-size:26px}.journey-next-note{padding-inline:18px}
+}
+
+
+    /* A pocket-sized photo album, kept together at the top. */
+    .hero{padding:75px 0 86px}.hero-inner{gap:42px}
+    .hero-photo-stage{min-height:620px;flex-direction:column;justify-content:flex-start;align-items:center;padding-top:12px;width:100%}
+    .hero-photo-stage .blob{width:90%;height:430px;top:70px;right:4%;max-width:440px}
+    .photo-stack{position:relative;width:100%;max-width:470px;height:510px;isolation:isolate}
+    .stack-photo{position:absolute;top:37px;left:50%;width:calc(100% - 100px);max-width:355px;margin:0;padding:10px 10px 18px;border:1px solid #e4d7ca;background:#fffdf6;box-shadow:5px 7px 0 #563f484d,0 17px 35px #60474824;transform-origin:50% 85%;transition:transform .65s var(--ease),filter .65s;}
+    .stack-photo[data-layer="0"]{z-index:4;transform:translate(-50%,0) rotate(3deg)}
+    .stack-photo[data-layer="1"]{z-index:3;transform:translate(calc(-50% + 25px),-16px) rotate(11deg);filter:brightness(.96)}
+    .stack-photo[data-layer="2"]{z-index:2;transform:translate(calc(-50% - 25px),-22px) rotate(-10deg);filter:brightness(.93)}
+    .stack-photo[data-layer="3"]{z-index:1;transform:translate(-50%,-34px) rotate(-2deg);filter:brightness(.9)}
+    .stack-photo img{display:block;width:100%;height:auto;aspect-ratio:4/4.65;object-fit:cover;background:#e0d7cd}
+    .stack-photo img[src="photo.png"]{object-position:50% 50%}.stack-photo img[src="photo-tea.png"]{object-position:50% 42%}.stack-photo img[src="photo-sunshine.png"]{object-position:50% 46%}
+    .stack-photo figcaption{padding:16px 8px 0;min-height:66px}.stack-caption{display:block;font-size:12px;font-weight:800;letter-spacing:-.025em}.stack-sign{display:block;font-size:18px;color:#996171;text-align:right;margin-top:7px}
+    .stack-photo:not([data-layer="0"]) .tape{opacity:0}.stack-photo .tape{z-index:2;height:32px;top:-16px}
+    .hero-photo-stage .circle-stamp{z-index:6;width:98px;height:98px;top:12px;right:0;font-size:13px;pointer-events:none}
+    .hero-photo-stage .circle-stamp small{font-size:8px}
+    .photo-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:8px;width:max-content;position:relative;z-index:6}
+    .photo-turn{width:43px;height:43px;border:1px solid var(--ink);border-radius:50%;background:var(--paper);font-size:22px;color:var(--ink);box-shadow:2px 3px 0 var(--ink);transition:background .2s,transform .2s}.photo-turn:hover{background:var(--yellow);transform:translateY(-2px)}
+    #photoCounter{font-size:11px;font-weight:800;letter-spacing:.18em;color:#875d6b;min-width:60px;text-align:center}
+    .journey-shortcut{font-size:12px;font-weight:800;color:#9f5366;text-decoration:none;padding:15px 4px 0;position:relative;z-index:6}
+    .journey-shortcut span{font-size:22px;vertical-align:middle;padding-left:9px}
+    .hero-scribble{left:34%;bottom:27px}.hero-scribble::before{content:'↗';left:100px}
+    .closing-note{margin-top:58px}.tiny-surprise{padding-bottom:66px}
+    .mood-emoji{line-height:1.3;margin-bottom:8px}.mood-card:hover .mood-emoji{transform:rotate(-8deg) scale(1.08)}
+    .mood-card{min-height:237px}.mood-caption{line-height:1.8}
+    .wishbook{margin-top:30px;padding-top:23px;border-top:1px dashed #b49bb9}
+    .wishbook-top{display:flex;gap:9px;align-items:center}.wishbook-top>span{font-size:24px;color:#a8576b}.wishbook-top h4{font-size:20px;letter-spacing:-.04em;margin:0;font-weight:900}
+    .place-form{margin-top:17px}.place-form label{display:block;font-size:12px;font-weight:700;color:#775c6c;margin-bottom:10px}
+    .place-input-row{display:flex;gap:9px}.place-input-row input{width:100%;min-width:0;border:1px solid #b6a1b7;border-radius:9px;background:#fffdf9;padding:12px 11px;color:var(--ink);font-size:14px;line-height:1.6}
+    .place-input-row button{flex:0 0 47px;min-height:47px;border:1px solid var(--ink);background:var(--yellow);color:var(--ink);border-radius:9px;box-shadow:2px 3px 0 var(--ink);font-size:27px}
+    .place-input-row button:disabled{opacity:.6;cursor:wait}.place-message{font-size:12px!important;line-height:1.8!important;color:#85566b!important;min-height:0;margin:10px 0 0!important}.place-message:empty{margin:0!important}.place-message.ok{color:#356f58!important}.place-message.error{color:#a43b56!important}
+    .places-status,.places-empty{font-size:12px!important;line-height:1.9!important;color:#876f83!important;margin:18px 0 0!important}
+    .places-list{padding:0;list-style:none;margin:20px 0 0;display:grid;gap:10px;max-height:300px;overflow-y:auto;overscroll-behavior:contain}
+    .places-list:empty{margin:0}.place-item{display:flex;gap:9px;align-items:center;background:#fff9ef;border:1px solid #d8c8bd;border-radius:9px;padding:12px 11px;min-width:0}
+    .place-pin{font-size:9px;font-weight:800;color:#a45d70;border-bottom:1px solid #ca9b9d;align-self:flex-start;margin-top:4px}.place-name{font-size:13px;font-weight:700;line-height:1.8;overflow-wrap:anywhere;flex:1;min-width:0}.place-item time{font-size:9px;color:#927b83;white-space:nowrap}
+    @media(max-width:920px){.hero-photo-stage{min-height:535px;padding-top:12px}.photo-stack{height:440px}.stack-photo{width:calc(100% - 70px);max-width:300px}.stack-photo figcaption{padding:13px 4px 0;min-height:62px}.stack-caption{font-size:10px}.stack-sign{font-size:16px}.hero-photo-stage .circle-stamp{width:83px;height:83px;font-size:11px;right:-3px}.hero-photo-stage .blob{height:330px;top:67px}.hero-inner{gap:28px}}
+    @media(max-width:680px){
+      .hero{padding:46px 0 53px}.hero-inner{gap:36px}.hero-photo-stage{min-height:0;width:100%;max-width:420px;align-self:center;padding-top:8px;margin-top:0;padding-bottom:0}.photo-stack{width:100%;height:455px}.stack-photo{width:calc(100% - 78px);max-width:300px;top:35px}.stack-photo[data-layer="1"]{transform:translate(calc(-50% + 17px),-11px) rotate(10deg)}.stack-photo[data-layer="2"]{transform:translate(calc(-50% - 17px),-17px) rotate(-9deg)}.stack-photo[data-layer="3"]{transform:translate(-50%,-27px) rotate(-2deg)}
+      .stack-photo figcaption{min-height:65px;padding:14px 4px 0}.stack-caption{font-size:11px}.stack-sign{font-size:17px}.hero-photo-stage .blob{height:330px;top:61px;width:93%;right:3%}.hero-photo-stage .circle-stamp{right:0;top:4px;width:84px;height:84px;font-size:11px}.photo-controls{margin-top:0;gap:22px}.photo-turn{width:42px;height:42px}.journey-shortcut{font-size:11px;padding-top:13px}.hero-scribble{display:none}
+      .mood-emoji{margin:15px 0 8px;line-height:1.25}.mood-card{min-height:198px}.mood-name{font-size:20px}.mood-caption{font-size:10px;line-height:1.8}.mood-id{font-size:7px;letter-spacing:.01em}
+      .closing-note{margin-top:44px}.tiny-surprise{padding-bottom:48px}.wishbook-top h4{font-size:19px}.place-input-row input{font-size:16px}.places-list{max-height:330px}
+    }
+    @media(max-width:360px){.photo-stack{height:395px}.stack-photo{width:calc(100% - 68px);top:31px}.stack-caption{font-size:10px}.stack-sign{font-size:16px}.hero-photo-stage .blob{height:290px}.hero-photo-stage .circle-stamp{width:74px;height:74px;top:0;font-size:10px}.mood-name{font-size:18px}.mood-caption{font-size:9px}.mood-card{min-height:189px}}
+
+    /* Our shared path is the opening view. */
+    .journey-section{padding-top:64px;padding-bottom:72px;border-top:0;background:var(--paper)}
+    .journey-heading{align-items:center;margin-bottom:38px;min-height:180px}
+    .journey-heading .section-title{font-size:clamp(37px,4.7vw,62px);line-height:1.28;letter-spacing:-.055em}
+    .journey-companions{width:280px;position:relative;align-self:center;text-align:center;margin-top:-10px}
+    .companion-pair{display:flex;align-items:end;justify-content:center;gap:0;height:122px}
+    .journey-companions p{font-size:12px;line-height:1.9;color:#9d6574;margin:4px 0 0;transform:rotate(-3deg)}
+    .cute-sticker{display:block;flex:0 0 auto;width:125px;height:125px;background-image:url('scrapbook-stickers.png');background-repeat:no-repeat;background-size:200% 200%;pointer-events:none;filter:drop-shadow(0 3px 1px #64444c13)}
+    .sticker-puppy{background-position:0 0;transform:rotate(-9deg);margin-right:-16px}
+    .sticker-snowman{background-position:100% 0;transform:rotate(8deg)}
+    .sticker-note-puppy{position:absolute;left:-34px;bottom:-35px;background-position:0 100%;width:109px;height:109px;transform:rotate(-12deg)}
+    .care-doodle{font-size:19px;letter-spacing:.4em;color:#a75b74}
+    .journey-map{padding-inline:34px}.journey-postcard{max-width:415px}
+    .journey-stops{align-items:center;gap:78px;grid-template-columns:minmax(0,1fr) minmax(0,.9fr)}
+    .journey-stop-next{max-width:405px;padding-top:24px}.journey-route{height:85%}
+    .checkin{padding-top:80px;padding-bottom:90px}
+    @media(max-width:920px){.journey-companions{width:220px}.cute-sticker{width:109px;height:109px}.journey-map{padding-inline:14px}.journey-stops{gap:45px}.journey-heading{min-height:160px}.sticker-note-puppy{width:95px;height:95px;left:-22px;bottom:-30px}}
+    @media(max-width:680px){
+      .journey-section{padding-top:35px;padding-bottom:46px}.journey-heading{display:block;min-height:0;margin-bottom:27px;position:relative}
+      .journey-heading .section-title{font-size:clamp(34px,8.6vw,45px);line-height:1.35;max-width:95%}
+      .journey-companions{display:flex;align-items:center;justify-content:flex-end;width:100%;gap:10px;margin:6px 0 -4px;text-align:right}
+      .companion-pair{height:94px;order:2}.cute-sticker{width:95px;height:95px}.sticker-puppy{margin-right:-23px}.journey-companions p{font-size:11px;margin:0;transform:rotate(-2deg);max-width:135px}
+      .journey-map{padding-left:20px;padding-right:3px}.journey-stops{display:block}.journey-doodle-sun{display:none}.journey-stop-next{padding-top:44px;max-width:385px}.journey-postcard{max-width:385px}.journey-route{display:none}
+      .sticker-note-puppy{width:84px;height:84px;bottom:-29px;left:-7px}.checkin{padding:62px 0 68px}
+    }
+    @media(max-width:360px){.journey-heading .section-title{font-size:32px}.journey-companions p{font-size:10px;max-width:115px}.cute-sticker{width:83px;height:83px}.companion-pair{height:85px}.journey-map{padding-left:12px}.sticker-note-puppy{width:80px;height:80px}}
+.period-section{margin:56px auto 65px;max-width:440px;color:var(--ink,#382a31)}
+.period-calendar-card{padding:26px 27px 19px;border:1.5px solid #382a31;border-radius:25px;background:#fffaf3;box-shadow:6px 7px 0 #e7c8d0}
+.period-calendar-heading{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px}.period-calendar-heading h2{font-size:25px!important;line-height:1.4;margin:0!important;font-weight:900;letter-spacing:-.04em}.period-flower{color:#bb7086;font-size:30px}
+.period-month-row{display:flex;align-items:center;justify-content:space-between;margin:0 0 13px}.period-month-row h3{font-size:17px;font-weight:900;letter-spacing:.06em;margin:0}.period-month-row button{width:34px;height:34px;border:0;border-radius:50%;background:#e0eee5;color:#382a31;font:inherit;font-size:27px;line-height:1;cursor:pointer}.period-month-row button:disabled{opacity:.3;cursor:default}
+.period-weekdays,.period-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.period-weekdays{margin-bottom:7px}.period-weekdays span{text-align:center;font-size:11px;font-weight:800;color:#82676f;padding:4px 0}.period-calendar>button{position:relative;aspect-ratio:1;border:1px solid transparent;border-radius:50%;background:transparent;color:#382a31;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.period-calendar>button:hover:not(:disabled){background:#e3eee4}.period-calendar>button.period-actual{background:#edbcc5}.period-calendar>button.period-estimated{border:2px solid #bd7187}.period-calendar>button[aria-current=date]{font-weight:900;text-decoration:underline;text-underline-offset:4px}.period-calendar>button[aria-pressed=true]{outline:2px solid #382a31;outline-offset:1px}.period-calendar>button:disabled{color:#b9a9ab;cursor:default}
+.period-calendar-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;font-size:12px;font-weight:800;color:#7a5662}.period-prediction{margin:8px 0 17px;font-size:16px;font-weight:900;line-height:1.6;text-align:center;min-height:25px}
+.period-calendar-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.period-calendar-actions button{padding:13px 8px;border:1px solid #382a31;border-radius:12px;color:#382a31;font:inherit;font-size:13px;font-weight:900;cursor:pointer;box-shadow:2px 3px 0 #382a31}.period-start-button{background:#d9eadd}.period-end-button{background:#efd5db}.period-calendar-actions button:active{transform:translate(1px,2px);box-shadow:1px 1px 0 #382a31}.period-feedback{min-height:18px;margin:11px 0 0;font-size:12px;line-height:1.5;text-align:center;color:#396c54;font-weight:700}.period-feedback.error{color:#a13450}
+.period-calendar-card button:focus-visible{outline:3px solid #9f4d6a;outline-offset:3px}
+@media(max-width:480px){.period-section{margin:38px auto 46px;max-width:390px}.period-calendar-card{padding:23px 20px 17px}.period-calendar-heading h2{font-size:23px!important}.period-calendar>button{font-size:12px}.period-calendar-actions button{font-size:12px;padding:13px 5px}}
+
+
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="回到最上方"><span class="brand-mark">✳</span><span>融的小小關心所</span></a>
-      <div class="nav-right"><span class="nav-status"><span class="live-dot" aria-hidden="true"></span> A LITTLE CHEER</span><span id="todayLabel" aria-label="今天日期"></span><a class="nav-link" href="#checkin">今天的你 ↗</a></div>
+      <div class="nav-right"><span class="nav-status"><span class="live-dot" aria-hidden="true"></span> A LITTLE CHEER</span><span id="todayLabel" aria-label="今天日期"></span><a class="nav-link" href="#checkin">今天的心情 ↗</a></div>
     </div>
   </header>
   <div class="marquee" aria-hidden="true">
@@ -283,50 +403,89 @@
     </div>
   </div>
   <main id="top">
-    <section class="hero container" aria-labelledby="mainTitle">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <span class="eyebrow"><span class="mini-line"></span>A LITTLE BOOST FOR YOU · #001</span>
-          <h1 id="mainTitle" class="hero-title"><span class="hi">嗨，</span><br><span class="nickname">kk小朋友</span><br><span class="end">今天過的好嗎？</span></h1>
-          <p class="hero-lead">今天有沒有好好吃飯，有沒有遇到開心的事？<br>想聽你說說今天，也想把一點好心情留給你。<br><strong>平凡的小事，我也想聽。</strong></p>
-          <div class="hero-actions">
-            <a class="primary-link" href="#checkin">和融說說今天 <span class="round-arrow" aria-hidden="true">↗</span></a>
-            <button class="whisper" id="heartButton" type="button">給你一點好心情 <span aria-hidden="true">✳</span></button>
-          </div>
-          <span class="vertical-note">A MOMENT, A LITTLE CHEER —</span>
-        </div>
-        <div class="hero-photo-stage">
-          <div class="blob" aria-hidden="true"></div>
-          <div class="circle-stamp" aria-hidden="true"><small>YOU GOT THIS</small>今天也<br>辛苦了 ✳</div>
-          <figure class="photo-frame">
-            <div class="tape" aria-hidden="true"></div>
-            <img src="photo.png" alt="在報紙牆前拿著手機自拍、比出可愛手勢的照片" width="412" height="416" fetchpriority="high">
-            <figcaption class="photo-bottom"><span>PHOTO NOTE / 01</span><em>a little cheer ✳</em></figcaption>
-          </figure>
-          <span class="photo-doodle" aria-hidden="true">✳</span>
-          <span class="pink-star" aria-hidden="true">✳</span>
-        </div>
+    <section class="journey-section" id="journey" aria-labelledby="journeyTitle">
+  <div class="container">
+    <div class="journey-heading">
+      <div>
+        <div class="section-num">01 / OUR LITTLE JOURNEY</div>
+        <h1 id="journeyTitle" class="section-title">一起走過的路，<br>慢慢變長。</h1>
       </div>
-      <div class="hero-scribble" aria-hidden="true">今天的可愛，也有好好收藏。</div>
-    </section>
+      <div class="journey-companions"><div class="companion-pair" aria-hidden="true"><span class="cute-sticker sticker-puppy"></span><span class="cute-sticker sticker-snowman"></span></div><p>一起走走，<br>也把普通的一天好好記住。</p></div>
+    </div>
+
+    <div class="journey-map">
+      <svg class="journey-route" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M 158 125 C 233 18, 410 48, 462 158 S 492 412, 658 388 S 785 151, 931 247" />
+      </svg>
+      <span class="journey-doodle journey-doodle-sun" aria-hidden="true">☀</span>
+      <span class="journey-doodle journey-doodle-star" aria-hidden="true">✳</span>
+
+      <ol class="journey-stops" aria-label="一起留下的旅程紀錄">
+        <li class="journey-stop journey-stop-memory">
+          <div class="journey-stop-label"><span class="journey-dot" aria-hidden="true"></span><span>01 / A DAY TO KEEP</span></div>
+          <article class="journey-postcard" aria-labelledby="ikeaMemoryTitle">
+            <span class="journey-tape" aria-hidden="true"></span>
+            <div class="journey-postcard-top">
+              <time datetime="2026-10-25">2026.10.25 <span>SUN</span></time>
+              <span class="journey-place">IKEA</span>
+            </div>
+            <figure class="journey-photo">
+              <img src="photo-ikea-20261025.jpg" alt="2026 年 10 月 25 日，在 IKEA 一起留下的合照" width="1108" height="1477" loading="lazy">
+              <figcaption>
+                <span class="journey-photo-note handwritten">a little day, a lovely memory.</span>
+                <h3 id="ikeaMemoryTitle">這一天，我們在 IKEA。</h3>
+                <p>把一起去過的地方，<br>慢慢收成可以回頭看的日常。</p>
+              </figcaption>
+            </figure>
+            <span class="journey-postcard-heart" aria-hidden="true">♡</span>
+          </article>
+        </li>
+
+        <li class="journey-stop journey-stop-next">
+          <div class="journey-stop-label"><span class="journey-dot journey-dot-open" aria-hidden="true"></span><span>STILL ON OUR WAY</span></div>
+          <div class="journey-next-note">
+            <span class="journey-next-kicker">留一點期待，給以後。</span>
+            <h3>下一站，<br>留給我們慢慢走。</h3>
+            <p>下一張一起拍的照片，<br>下一個順路去的地方。<br>不急，還有好多日常可以慢慢收藏。</p>
+
+            <div class="wishbook" aria-labelledby="placesTitle">
+              <div class="wishbook-top"><span aria-hidden="true">↗</span><h4 id="placesTitle">想一起去的地方</h4></div>
+              <form id="placeForm" class="place-form">
+                <label for="placeInput">下一站想去哪裡？</label>
+                <div class="place-input-row"><input id="placeInput" name="place" type="text" maxlength="60" autocomplete="off" required><button id="placeSendButton" type="submit" aria-label="把地點放進下一站">＋</button></div>
+                <p id="placeSubmitInfo" class="place-message" role="status" aria-live="polite"></p>
+              </form>
+              <p id="placesStatus" class="places-status" role="status">正在翻開目的地小本子…</p>
+              <p id="placesEmpty" class="places-empty" hidden>下一站，等我們一起決定。</p>
+              <ol id="placesList" class="places-list" aria-label="想一起去的地方清單"></ol>
+            </div>
+            <span class="journey-next-sign handwritten">more little moments ahead.</span>
+          </div>
+          <div class="journey-continuation" aria-hidden="true"><span></span><b>↗</b></div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
 
     <section id="checkin" class="checkin" aria-labelledby="checkinTitle">
       <div class="container">
         <div class="section-top">
-          <div><div class="section-num">01 / A LITTLE CHECK-IN</div><h2 id="checkinTitle" class="section-title">現在的你，<br>是哪一種小宇宙？</h2></div>
-          <p>不管今天走到哪一站，<br>都有一點關心，在這裡等你。</p>
+          <div><div class="section-num">02 / A LITTLE FEELING</div><h2 id="checkinTitle" class="section-title">今天的心情，<br>想分一點給我嗎？</h2></div>
+          <p>開心的、低落的，<br>我都想好好聽你說。</p>
         </div>
-        <div id="statusPicker" class="mood-grid" role="group" aria-label="今天的狀態">
-          <button type="button" class="mood-card mood-four" data-choice="要去上班了" aria-pressed="false" aria-controls="letter"><span class="mood-id">01 / ON MY WAY</span><span class="mood-emoji" aria-hidden="true">☀️</span><span class="mood-name">要去上班了</span><span class="mood-caption">把一點好運放進口袋</span><span class="mood-corner" aria-hidden="true">go!</span></button>
-          <button type="button" class="mood-card mood-one" data-choice="還在上班" aria-pressed="false" aria-controls="letter"><span class="mood-id">02 / STILL WORKING</span><span class="mood-emoji" aria-hidden="true">💻</span><span class="mood-name">還在上班</span><span class="mood-caption">替努力中的你加油</span><span class="mood-corner" aria-hidden="true">work</span></button>
-          <button type="button" class="mood-card mood-two" data-choice="準備下班" aria-pressed="false" aria-controls="letter"><span class="mood-id">03 / ALMOST FREE</span><span class="mood-emoji" aria-hidden="true">🧋</span><span class="mood-name">準備下班</span><span class="mood-caption">自由就在轉角了耶</span><span class="mood-corner" aria-hidden="true">soon</span></button>
-          <button type="button" class="mood-card mood-three" data-choice="下班了" aria-pressed="false" aria-controls="letter"><span class="mood-id">04 / OFF DUTY</span><span class="mood-emoji" aria-hidden="true">🌷</span><span class="mood-name">下班了</span><span class="mood-caption">把今天的辛苦放下來</span><span class="mood-corner" aria-hidden="true">yay!</span></button>
-          <button type="button" class="mood-card mood-five" data-choice="午休吃飯" aria-pressed="false" aria-controls="letter"><span class="mood-id">05 / LUNCH BREAK</span><span class="mood-emoji" aria-hidden="true">🍱</span><span class="mood-name">午休吃飯</span><span class="mood-caption">再忙也要好好吃飯</span><span class="mood-corner" aria-hidden="true">lunch</span></button>
-          <button type="button" class="mood-card mood-six" data-choice="準備開會" aria-pressed="false" aria-controls="letter"><span class="mood-id">06 / BEFORE THE MEETING</span><span class="mood-emoji" aria-hidden="true">📝</span><span class="mood-name">準備開會</span><span class="mood-caption">帶著一點從容出發</span><span class="mood-corner" aria-hidden="true">ready</span></button>
+        <div id="statusPicker" class="mood-grid" role="group" aria-label="今天的心情">
+          <button type="button" class="mood-card mood-two" data-choice="心情美麗" aria-pressed="false" aria-controls="letter"><span class="mood-id">01 / A LITTLE SUNSHINE</span><span class="mood-emoji" aria-hidden="true">✨</span><span class="mood-name">心情美麗</span><span class="mood-caption">有什麼開心的事，分我一點</span><span class="mood-corner" aria-hidden="true">happy</span></button>
+          <button type="button" class="mood-card mood-three" data-choice="平平淡淡" aria-pressed="false" aria-controls="letter"><span class="mood-id">02 / JUST AN ORDINARY DAY</span><span class="mood-emoji" aria-hidden="true">☁️</span><span class="mood-name">平平淡淡</span><span class="mood-caption">普通的一天，也想聽你說</span><span class="mood-corner" aria-hidden="true">slow</span></button>
+          <button type="button" class="mood-card mood-one" data-choice="有點累了" aria-pressed="false" aria-controls="letter"><span class="mood-id">03 / A SOFT LITTLE PAUSE</span><span class="mood-emoji" aria-hidden="true">💤</span><span class="mood-name">有點累了</span><span class="mood-caption">先讓自己喘一口氣吧</span><span class="mood-corner" aria-hidden="true">rest</span></button>
+          <button type="button" class="mood-card mood-six" data-choice="心情不好" aria-pressed="false" aria-controls="letter"><span class="mood-id">04 / A RAINY LITTLE MOOD</span><span class="mood-emoji" aria-hidden="true">🌧️</span><span class="mood-name">心情不好</span><span class="mood-caption">不開心的時候，我也在</span><span class="mood-corner" aria-hidden="true">here</span></button>
+          <button type="button" class="mood-card mood-four" data-choice="有點煩惱" aria-pressed="false" aria-controls="letter"><span class="mood-id">05 / ONE THOUGHT AT A TIME</span><span class="mood-emoji" aria-hidden="true">🌀</span><span class="mood-name">有點煩惱</span><span class="mood-caption">那些繞來繞去的事，可以說</span><span class="mood-corner" aria-hidden="true">soft</span></button>
+          <button type="button" class="mood-card mood-five" data-choice="想找你聊聊" aria-pressed="false" aria-controls="letter"><span class="mood-id">06 / I'M ALL EARS</span><span class="mood-emoji" aria-hidden="true">💬</span><span class="mood-name">想找你聊聊</span><span class="mood-caption">小事、大事，我都想聽</span><span class="mood-corner" aria-hidden="true">talk</span></button>
         </div>
         <div class="letter-stage" id="letterStage">
           <div id="letter" class="letter">
-            <div class="letter-toolbar"><span id="selectedStatus" class="selected-status"></span><button type="button" id="changeStatus" class="change-status">← 換個狀態</button></div>
+            <div class="letter-toolbar"><span id="selectedStatus" class="selected-status"></span><button type="button" id="changeStatus" class="change-status">← 換個心情</button></div>
             <div class="letter-card">
               <div id="letterKicker" class="letter-kicker">DAILY CHEER / NO. 01</div>
               <h3 id="letterGreeting" class="letter-greeting" tabindex="-1"></h3>
@@ -336,13 +495,13 @@
             <div class="note-area" id="noteArea">
               <div class="note-top"><label class="note-label" for="noteInput">今天想和融說的話</label></div>
               <textarea id="noteInput" class="note-input" maxlength="120"></textarea>
-              <div class="send-row"><button type="button" class="send-button" id="sendButton"><span id="sendLabel">送出近況給融</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></div>
+              <div class="send-row"><button type="button" class="send-button" id="sendButton"><span id="sendLabel">把心情告訴融</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></div>
               <div id="submitInfo" class="submit-info" aria-live="polite" role="status"></div>
             </div>
           </div>
           <div id="receipt" class="receipt" aria-live="polite" role="status">
             <div class="receipt-top">✓ 想說的話，好好收到了</div>
-            <h3>收到你的近況啦！🎉</h3>
+            <h3>收到你的心情啦！ ♡</h3>
             <p id="receiptMessage">今天的你，也被好好放在心上了。<br>謝謝你願意和我分享。</p>
             <div class="receipt-bottom"><span class="receipt-time" id="receiptTime"></span><button type="button" class="again-button" id="againButton">再和融說說話 ↗</button></div>
           </div>
@@ -352,11 +511,11 @@
 
     <section class="tiny-surprise container" aria-labelledby="surpriseTitle">
       <div class="surprise-grid">
-        <div class="surprise-display"><div class="surprise-card-top"><span id="fortuneCategory">一點關心</span><span id="fortuneNumber">01 / 24</span></div><div class="surprise-quote" id="surpriseQuote" aria-live="polite">「有事情，我希望你都可以跟我分享。開心的、委屈的，還有那些不知道怎麼說的小事，我都想聽。」</div><div class="surprise-sign">慢慢說，我在。 <span>From 融 ✳</span></div></div>
-        <div class="surprise-copy"><div class="section-num">02 / POCKET-SIZED SUNSHINE</div><h2 id="surpriseTitle" class="section-title">再給你一點<br><span class="handwritten" style="color:var(--red)">tiny happiness.</span></h2><p>有些話，想多說給你聽幾次。<br>希望這些小小的字，能陪你走過普通的一天，<br>也接住偶爾有點累的時候。</p><button type="button" class="draw-button" id="drawButton">✳ 再收一張小紙條</button></div>
+        <div class="surprise-display"><div class="surprise-card-top"><span id="fortuneCategory">一點關心</span><span id="fortuneNumber">01 / 24</span></div><div class="surprise-quote" id="surpriseQuote" aria-live="polite">「有事情，我希望你都可以跟我分享。開心的、委屈的，還有那些不知道怎麼說的小事，我都想聽。」</div><div class="surprise-sign">慢慢說，我在。 <span>From 融 ✳</span></div><span class="cute-sticker sticker-note-puppy" aria-hidden="true"></span></div>
+        <div class="surprise-copy"><div class="section-num">03 / POCKET-SIZED SUNSHINE</div><h2 id="surpriseTitle" class="section-title">再給你一點<br><span class="handwritten" style="color:var(--red)">tiny happiness.</span></h2><p>有些話，想多說給你聽幾次。<br>希望這些小小的字，能陪你走過普通的一天，<br>也接住偶爾有點累的時候。</p><button type="button" class="draw-button" id="drawButton">✳ 再收一張小紙條</button></div>
       </div>
 
-      <div class="care-heading"><span>WORDS TO KEEP CLOSE</span><h3>還有這些，想悄悄跟你說。</h3><span aria-hidden="true">↙ ✳</span></div>
+      <div class="care-heading"><span class="care-doodle" aria-hidden="true">♡ ✳ ☁</span><h3>還有這些，想悄悄跟你說。</h3><span aria-hidden="true">↙ ✳</span></div>
       <div class="care-grid">
         <article class="care-note care-peach"><span class="care-icon" aria-hidden="true">♡</span><span class="care-kicker">01 / I'M HERE</span><h4>有事情，就跟我說。</h4><p>我希望你都可以跟我分享，<br>不用先整理好心情，<br>想到哪裡，就從哪裡說。</p><span class="care-sign">我會好好聽。</span></article>
         <article class="care-note care-yellow"><span class="care-icon" aria-hidden="true">☀</span><span class="care-kicker">02 / LITTLE JOYS</span><h4>小事也想聽。</h4><p>午餐吃了什麼、遇見什麼趣事，<br>或只是今天的天空很好看。<br>你的日常，我都覺得可愛。</p><span class="care-sign">分享給我一點點吧。</span></article>
@@ -365,28 +524,39 @@
         <article class="care-note care-cream"><span class="care-icon" aria-hidden="true">✷</span><span class="care-kicker">05 / PROUD OF YOU</span><h4>你的努力，我有看見。</h4><p>有些進步很小，<br>小到只有自己才知道。<br>但你走過的每一步，都算數。</p><span class="care-sign">想替你拍拍手。</span></article>
         <article class="care-note care-blue"><span class="care-icon" aria-hidden="true">☾</span><span class="care-kicker">06 / GOOD NIGHT</span><h4>今天也要照顧好自己。</h4><p>好好吃飯，別總是忙到忘記喝水。<br>晚一點把心事放下，<br>讓自己睡一個安穩的覺。</p><span class="care-sign">希望你今晚有個好夢。</span></article>
       </div>
-      <div class="photo-heading"><div><span class="photo-eyebrow">LITTLE MOMENTS, BIG SMILES</span><h3>喜歡的日常，慢慢收藏。</h3></div><span class="handwritten">a little more sunshine ↘</span></div>
-      <div class="memory-grid">
-        <figure class="memory-photo memory-tea"><div class="memory-tape" aria-hidden="true"></div><div class="memory-image"><img src="photo-tea.png" alt="kk 穿著綠白條紋襯衫，捧著一杯飲料" width="880" height="1113" loading="lazy"></div><figcaption><span class="memory-id">01 / A CUP OF JOY</span><strong>喝一口甜的，日子也甜一點。</strong><span>希望你今天也遇見喜歡的小事。</span><i aria-hidden="true">♡</i></figcaption></figure>
-        <figure class="memory-photo memory-sunshine"><div class="memory-tape" aria-hidden="true"></div><div class="memory-image"><img src="photo-sunshine.png" alt="kk 坐在陽光下的草地上，拿著飲料比出手勢" width="1103" height="1112" loading="lazy"></div><figcaption><span class="memory-id">02 / SUNSHINE LOOKS GOOD ON YOU</span><strong>有太陽，也有可愛的你。</strong><span>願開心的時刻，在你身邊多待一會兒。</span><i aria-hidden="true">☀</i></figcaption></figure>
-        <figure class="memory-photo memory-blue"><div class="memory-tape" aria-hidden="true"></div><div class="memory-image"><img src="photo-blue.png" alt="kk 站在大劇院的藍色弧形牆前，張開雙手" width="1077" height="1137" loading="lazy"></div><figcaption><span class="memory-id">03 / YOUR OWN LITTLE WORLD</span><strong>去喜歡的地方，做自在的你。</strong><span>還有好多值得期待的風景，在前面等你。</span><i aria-hidden="true">✳</i></figcaption></figure>
-      </div>
       <p class="closing-note">不只想知道你今天過得好不好，<br>也想讓你知道，<strong>你的每一種心情，我都願意聽。</strong><span>— 融</span></p>
     </section>
+
+
+<section id="periodSection" class="period-section container" aria-labelledby="periodTitle">
+  <div class="period-calendar-card">
+    <div class="period-calendar-heading"><span class="period-flower" aria-hidden="true">✿</span><h2 id="periodTitle">經期小本子</h2></div>
+    <div class="period-month-row"><button id="periodPrevMonth" type="button" aria-label="上一個月">‹</button><h3 id="periodMonth"></h3><button id="periodNextMonth" type="button" aria-label="下一個月">›</button></div>
+    <div class="period-weekdays" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+    <div id="periodCalendar" class="period-calendar" role="group" aria-label="經期月曆"></div>
+    <div class="period-calendar-caption"><span id="periodSelectedDate"></span><span id="periodSummary"></span></div>
+    <p id="periodPrediction" class="period-prediction"></p>
+    <div class="period-calendar-actions"><button id="periodTodayButton" class="period-start-button" type="button">今天經期來了</button><button id="periodEndButton" class="period-end-button" type="button">經期結束了</button></div>
+    <p id="periodFeedback" class="period-feedback" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+
+
   </main>
   <footer class="bottom"><div class="container bottom-inner"><div><div class="bottom-kicker">THAT'S ALL. JUST WANTED TO SAY...</div><h2>kk小朋友，<br>今天也有好好被惦記著。 ✳</h2><p>有開心的事想和你一起笑，有煩惱的時候也想聽你說。明天也繼續替你加油。</p></div><div class="bottom-sign">給你的小小加油站<span class="big">融關心您～ ❤️</span></div></div></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     'use strict';
-    // 已預填昨天的網址。重要：更新 Code.gs 後，務必「管理部署作業 → 編輯 → 新版本 → 部署」。
+    // 心情與目的地共用原收件服務。先部署新版 Code.gs，再更新本頁。
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwC_RmkQWsQQAsxmaoDo92jKf2wuVIa2LbWZBYJQWAqFVj9ZxpLAt_UwZTeWiAkaTw3ZA/exec';
     const letters = {
-      '要去上班了': {kicker:'LETTER 01 / A LITTLE LUCK FOR YOU', greeting:'要出發啦，帶上一點好心情。 ☀️', body:'kk小朋友，出門前記得吃點東西，路上慢慢來。希望今天的事情都順一點，也遇到好相處的人。上班途中有什麼小事，晚點也想聽你跟我說。今天也替你加油！'},
-      '還在上班': {kicker:'LETTER 02 / CHEERING FOR YOU', greeting:'忙碌中的你，辛苦啦。 💻', body:'先喝一口水，讓肩膀放鬆一點。事情一件一件來就好，不用把所有壓力都放在自己身上。今天如果有讓你開心、委屈，或很想吐槽的事，我都想聽你分享。'},
-      '準備下班': {kicker:'LETTER 03 / ALMOST THERE', greeting:'再一下下，就到自己的時間了。 🧋', body:'希望最後的收尾順順利利，等等能吃到想吃的晚餐。今天做得好的地方，記得也替自己開心一下。下班路上慢慢走，今天的故事，留一點給我聽吧。'},
-      '下班了': {kicker:'LETTER 04 / YOU DID WELL TODAY', greeting:'下班快樂，今天很努力了。 🌷', body:'把工作的辛苦先放下來，好好吃頓飯，做一件自己喜歡的事。開心的、不開心的，我希望你都可以跟我分享。你不用把心情整理得很漂亮，我也會好好聽。'},
-      '午休吃飯': {kicker:'LETTER 05 / A LITTLE LUNCH BREAK', greeting:'吃飯時間到，好好補充元氣。 🍱', body:'kk小朋友，先把手邊的忙碌放一下，吃一頓喜歡的午餐吧。慢慢吃，也記得喝點水，讓自己喘口氣。今天吃了什麼好吃的，晚點也想聽你分享。希望這一小段午休，能替下午存一點好心情。'},
-      '準備開會': {kicker:'LETTER 06 / YOU HAVE GOT THIS', greeting:'開會加油，慢慢說就好。 📝', body:'先喝口水，確認一下想說的重點，不用把每一句話都想得很完美。希望等等討論順順利利，想表達的事情都有被好好聽見。開完會如果有什麼想分享，或只是想吐槽一下，我都在。'}
+      '心情美麗':{kicker:'A LITTLE LETTER / SUNSHINE',greeting:'看到你開心，我也跟著開心。 ✨',body:'今天是不是有什麼小小的好事？吃到喜歡的東西、聽到一句好聽的話，或只是醒來覺得心情不錯，都很值得開心。分一點給我吧，我想和你一起把這份快樂多留一會兒。'},
+      '平平淡淡':{kicker:'A LITTLE LETTER / ORDINARY IS LOVELY',greeting:'平凡的一天，也值得被記得。 ☁️',body:'沒有特別的事發生，也沒有關係。今天吃了什麼、路上看見什麼，甚至只是發了一會兒呆，我都想聽你說。不是只有很精彩的日子，才值得和我分享。'},
+      '有點累了':{kicker:'A LITTLE LETTER / TAKE IT SLOW',greeting:'先歇一會兒，今天也辛苦了。 💤',body:'把肩膀放鬆，喝一口水，讓自己慢下來一點。你不用一直很有精神，也不用每件事都立刻做好。等你想說話的時候，我在；現在先好好休息，也很好。'},
+      '心情不好':{kicker:'A LITTLE LETTER / A SOFT PLACE TO LAND',greeting:'不開心的你，也可以來找我。 🌧️',body:'不需要先想好怎麼說，也不用勉強自己笑一笑。覺得委屈、低落，或只是說不出哪裡不對勁，都可以慢慢和我說。我不急著給答案，想先好好聽你的心情。'},
+      '有點煩惱':{kicker:'A LITTLE LETTER / ONE THOUGHT AT A TIME',greeting:'繞在心裡的事，一件一件說。 🌀',body:'有些事情想了很久，還是找不到答案，也很正常。你可以從最讓你在意的那一點開始，不用一次把所有事情解決。說出來也許會輕一點，我願意陪你慢慢想。'},
+      '想找你聊聊':{kicker:'A LITTLE LETTER / I AM LISTENING',greeting:'我在呀，你想從哪裡開始說？ 💬',body:'突然想到的小事、今天遇見的人，或一句沒有特別原因的「想找你說話」，都可以。有事情，我希望你都可以跟我分享。不用等到有什麼大事，你的日常，我也很想聽。'}
     };
     const fortunes = [
       {category:'一點關心', text:'有事情，我希望你都可以跟我分享。開心的、委屈的，還有那些不知道怎麼說的小事，我都想聽。'},
@@ -443,10 +613,6 @@
         document.body.append(h);h.addEventListener('animationend',()=>h.remove(),{once:true});
       }
     }
-    $('heartButton').addEventListener('click',(e)=>{
-      const r=e.currentTarget.getBoundingClientRect();launchHearts(r.left+r.width/2,r.top+r.height/2,13);
-      toast('今日份好心情 +1 ✳');
-    });
     moodButtons.forEach((button)=>button.addEventListener('click',()=>{
       if(isSending) return;
       if(delivered) resetForm();
@@ -484,41 +650,62 @@
     // Apps Script 的 ContentService 不可靠地提供瀏覽器可讀的跨網域 POST 回應。
     // 因此先 POST 寫入，再以 JSONP（僅查詢，不寫入）按隨機 requestId 核對後台是否真的存檔。
     // 只有取得後台 received:true，畫面才會顯示「收到」。
-    function getConfirmation(requestId){
+    function deliveryError(code){
+      const error=new Error(code);error.code=code;return error;
+    }
+    function requestBackend(parameters){
       return new Promise((resolve,reject)=>{
         const callback='__cheerAck_'+Date.now()+'_'+Math.random().toString(36).slice(2);
         const element=document.createElement('script');
         let settled=false;
         const tidy=()=>{clearTimeout(timer);element.remove();try{delete window[callback]}catch(_){window[callback]=undefined}};
         const finish=(err,data)=>{if(settled)return;settled=true;tidy();if(err)reject(err);else resolve(data)};
-        const timer=setTimeout(()=>finish(new Error('確認連線逾時')),6500);
+        const timer=setTimeout(()=>finish(deliveryError('CONFIRMATION_TIMEOUT')),10000);
         window[callback]=(data)=>finish(null,data);
-        element.onerror=()=>finish(new Error('無法連線至確認服務'));
+        element.onerror=()=>finish(deliveryError('ACK_UNAVAILABLE'));
+        element.onload=()=>{if(!settled)finish(deliveryError('ACK_INVALID_RESPONSE'))};
         const url=new URL(SCRIPT_URL);
-        url.searchParams.set('action','status');url.searchParams.set('id',requestId);
+        Object.entries(parameters).forEach(([key,value])=>url.searchParams.set(key,String(value)));
         url.searchParams.set('callback',callback);url.searchParams.set('_',Date.now().toString());
         element.src=url.toString();document.head.appendChild(element);
       });
     }
+    function getConfirmation(requestId,kind='mood'){return requestBackend({action:kind==='place'?'place_status':'status',id:requestId})}
     const sleep=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
-    async function waitForConfirmation(requestId){
+    async function waitForConfirmation(requestId,kind='mood'){
       for(let attempt=0;attempt<7;attempt++){
         try{
-          const result=await getConfirmation(requestId);
+          const result=await getConfirmation(requestId,kind);
           if(result && result.ok===true && result.received===true) return result;
-          if(result && result.ok===false && result.error) throw new Error(result.error);
+          if(result && result.ok===false){
+            const error=deliveryError(result.code || 'BACKEND_ERROR');error.terminal=true;throw error;
+          }
         }catch(error){
           // 連線逾時或短暫錯誤，可繼續重試；保留 requestId 防止重複登記。
-          if(attempt===6) throw error;
+          if(error.terminal || attempt===6) throw error;
         }
         await sleep(1000+Math.min(attempt,3)*320);
       }
-      throw new Error('尚未取得後台確認');
+      throw deliveryError('NOT_CONFIRMED');
+    }
+    function deliveryFailureMessage(error){
+      const messages={
+        SPREADSHEET_NOT_CONFIGURED:'收件服務還沒連上留言簿，你寫的話還在。',
+        UNSUPPORTED_CHOICE:'這份心情暫時無法送出，你寫的話還在。請聯絡融確認收件設定。',
+        INVALID_REQUEST:'這份心情暫時無法送出，你寫的話還在。',
+        INVALID_PLACE:'地點要在 1 到 60 個字之間，先確認一下再試試。',
+        PLACE_WRITE_FAILED:'這個地點暫時還沒存好，文字還在，請稍後再試。',
+        WRITE_FAILED:'留言暫時沒有存進留言簿，你寫的話還在。',
+        ACK_UNAVAILABLE:'暫時連不上收件確認服務，你寫的話還在。請稍後再試。',
+        ACK_INVALID_RESPONSE:'暫時無法確認收件，你寫的話還在。請稍後再試。',
+        CONFIRMATION_TIMEOUT:'收件確認等得有點久，你寫的話還在。請稍後再試。'
+      };
+      return messages[error && error.code] || '還沒確認收到，你寫的話還在。請稍後再試。';
     }
     function setSendingState(sending){
       isSending=sending;$('sendButton').disabled=sending;
       $('sendButton').classList.toggle('loading',sending);
-      $('sendLabel').textContent=sending?'正在送出近況…':'送出近況給融';
+      $('sendLabel').textContent=sending?'正在把心情送給融…':'把心情告訴融';
       $('noteInput').disabled=sending;
       moodButtons.forEach(b=>b.disabled=sending);
       $('changeStatus').disabled=sending;
@@ -532,16 +719,20 @@
       const note=Array.from($('noteInput').value.trim()).slice(0,120).join('');
       const requestId=pendingId || newRequestId(); pendingId=requestId;
       $('submitInfo').className='submit-info';
-      $('submitInfo').textContent='正在把你的近況送給融…';
+      $('submitInfo').textContent='正在把你的心情送給融…';
       setSendingState(true);
+      let postFailed=false;
       try{
         // no-cors 的 POST 只能表示請求已送出，不能代表成功寫入。
-        await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({choice:selectedChoice,note,requestId}),cache:'no-store'});
+        // 即使讀取重新導向回應失敗，後台也可能已寫入，仍須使用同一編號查詢。
+        try{
+          await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({choice:selectedChoice,note,requestId}),cache:'no-store'});
+        }catch(_){postFailed=true}
         $('submitInfo').textContent='正在確認收到了沒有…';
         const ack=await waitForConfirmation(requestId);
         delivered=true;
         $('letter').classList.remove('show');
-        $('receiptMessage').textContent=selectedChoice==='要去上班了'?'收到啦！希望今天上班順順利利，路上也要平安。':selectedChoice==='午休吃飯'?'收到啦！好好享受午餐，希望下午也有好心情。':selectedChoice==='準備開會'?'收到啦！開會加油，等你忙完再慢慢聊。':'今天的你，也被好好放在心上了。謝謝你願意和我分享。';
+        $('receiptMessage').textContent=selectedChoice==='心情美麗'?'收到你的一點快樂啦，想和你一起把今天記住。':selectedChoice==='心情不好'?'收到啦。不用急著變開心，我會好好聽你說。':'你的每一種心情，都有被好好放在心上。謝謝你願意和我分享。';
         $('receipt').classList.add('show');
         let receivedTime=new Date(ack.serverTime || Date.now());
         if(Number.isNaN(receivedTime.getTime()))receivedTime=new Date();
@@ -549,9 +740,9 @@
         if(motionOK) confetti();
         $('receipt').scrollIntoView({behavior:motionOK?'smooth':'auto',block:'center'});
       }catch(error){
-        $('submitInfo').textContent='還沒確認收到，你寫的話還在。稍等一下，再送一次就好。';
+        $('submitInfo').textContent=deliveryFailureMessage(error);
         $('submitInfo').className='submit-info error';
-        console.warn('回覆尚未確認:',error);
+        console.warn('回覆尚未確認:',{code:error.code || 'UNKNOWN',postFailed});
       }finally{setSendingState(false)}
     });
     function confetti(){
@@ -603,6 +794,195 @@
       element.classList.remove('changed');void element.offsetWidth;element.classList.add('changed');
       if(motionOK){const r=$('drawButton').getBoundingClientRect();launchHearts(r.left+r.width/2,r.top,6)}
     });
+
+    // Destinations are shared records in the backend, never browser-local storage.
+    let placeRecords=[];
+    let placePendingId='';
+    let placeSending=false;
+    let placesReadVersion=0;
+    const placeDateFormatter=new Intl.DateTimeFormat('zh-TW',{month:'numeric',day:'numeric'});
+    function renderPlaces(){
+      const list=$('placesList');list.replaceChildren();
+      $('placesEmpty').hidden=placeRecords.length!==0;
+      placeRecords.slice(0,50).forEach((record,index)=>{
+        const item=document.createElement('li');item.className='place-item';
+        const pin=document.createElement('span');pin.className='place-pin';pin.textContent=String(index+1).padStart(2,'0');
+        const name=document.createElement('span');name.className='place-name';name.textContent=record.place;
+        item.append(pin,name);
+        const date=new Date(record.createdAt);
+        if(record.createdAt && !Number.isNaN(date.getTime())){
+          const time=document.createElement('time');time.dateTime=record.createdAt;time.textContent=placeDateFormatter.format(date);item.append(time);
+        }
+        list.append(item);
+      });
+    }
+    async function loadPlaces(){
+      const version=++placesReadVersion;
+      try{
+        const result=await requestBackend({action:'places'});
+        if(version!==placesReadVersion)return;
+        if(!result || result.ok!==true || !Array.isArray(result.places))throw deliveryError(result && result.code || 'PLACES_UNAVAILABLE');
+        placeRecords=result.places.filter(p=>p && typeof p.id==='string' && typeof p.place==='string' && p.place.trim()).slice(0,50);
+        renderPlaces();$('placesStatus').textContent='';
+      }catch(_){
+        if(version===placesReadVersion)$('placesStatus').textContent='目的地小本子暫時打不開，晚一點再來看看。';
+      }
+    }
+    function setPlaceSending(sending){
+      placeSending=sending;$('placeInput').disabled=sending;$('placeSendButton').disabled=sending;
+      $('placeSendButton').textContent=sending?'…':'＋';
+    }
+    $('placeInput').addEventListener('input',()=>{
+      if(!placeSending)placePendingId='';
+      $('placeSubmitInfo').textContent='';$('placeSubmitInfo').className='place-message';
+    });
+    $('placeForm').addEventListener('submit',async(event)=>{
+      event.preventDefault();if(placeSending)return;
+      const place=$('placeInput').value.trim();
+      if(!place || Array.from(place).length>60){$('placeSubmitInfo').textContent=deliveryFailureMessage(deliveryError('INVALID_PLACE'));return}
+      const requestId=placePendingId || newRequestId();placePendingId=requestId;
+      $('placeSubmitInfo').textContent='正在把下一站收好…';$('placeSubmitInfo').className='place-message';
+      setPlaceSending(true);
+      try{
+        try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action:'place',place,requestId}),cache:'no-store'})}catch(_){}
+        const ack=await waitForConfirmation(requestId,'place');
+        // Keep this confirmed item visible even if the following list refresh fails.
+        placesReadVersion++;
+        placeRecords=[{id:requestId,place,createdAt:ack.serverTime || new Date().toISOString()},...placeRecords.filter(p=>p.id!==requestId)].slice(0,50);
+        renderPlaces();$('placesStatus').textContent='';
+        $('placeInput').value='';placePendingId='';
+        $('placeSubmitInfo').textContent='收好啦，下一站多了一點期待。';$('placeSubmitInfo').className='place-message ok';
+        await loadPlaces();
+      }catch(error){
+        const text=error.code==='SPREADSHEET_NOT_CONFIGURED'?'目的地小本子還沒連好，你寫的地點還在。':error.code==='INVALID_PLACE'?deliveryFailureMessage(error):'還沒確認存好，你寫的地點還在。請稍後再試。';
+        $('placeSubmitInfo').textContent=text;$('placeSubmitInfo').className='place-message error';
+      }finally{setPlaceSending(false)}
+    });
+    loadPlaces();
+(() => {
+  'use strict';
+  const KEY = 'kk-period-diary-v1';
+  const DAY = 86400000;
+  const CYCLE_DAYS = 28;
+  const byId = id => document.getElementById(id);
+  const ids = ['periodPrevMonth','periodNextMonth','periodMonth','periodCalendar','periodSelectedDate','periodSummary','periodPrediction','periodTodayButton','periodEndButton','periodFeedback'];
+  if (ids.some(id => !byId(id))) return;
+  let data = {version:1,cycleDays:CYCLE_DAYS,records:[]};
+  let readError = false;
+  function todayISO() {
+    const parts = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+    const value = type => parts.find(part => part.type === type).value;
+    return value('year') + '-' + value('month') + '-' + value('day');
+  }
+  function dayValue(iso) {
+    if (typeof iso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
+    const [year,month,day] = iso.split('-').map(Number);
+    if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) return null;
+    const date = new Date(0);
+    date.setUTCHours(0,0,0,0); date.setUTCFullYear(year,month - 1,day);
+    return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day ? date.getTime() : null;
+  }
+  const dateISO = date => String(date.getUTCFullYear()).padStart(4,'0') + '-' + String(date.getUTCMonth()+1).padStart(2,'0') + '-' + String(date.getUTCDate()).padStart(2,'0');
+  const label = iso => iso.replace(/-/g,'/');
+  function validRecord(record) {
+    if (!record || typeof record !== 'object') return false;
+    const start = dayValue(record.startDate);
+    const end = record.endDate === '' ? null : dayValue(record.endDate);
+    const today = dayValue(todayISO());
+    return start !== null && start <= today && (record.endDate === '' || (end !== null && end >= start && end <= today));
+  }
+  const sortedRecords = () => data.records.slice().sort((a,b) => b.startDate.localeCompare(a.startDate));
+  const feedback = (message,error = false) => { byId('periodFeedback').textContent = message; byId('periodFeedback').classList.toggle('error',error); };
+  let selectedDate = todayISO();
+  let viewYear = Number(selectedDate.slice(0,4));
+  let viewMonth = Number(selectedDate.slice(5,7)) - 1;
+  function monthStart(year,month) {
+    const date = new Date(0); date.setUTCHours(0,0,0,0); date.setUTCFullYear(year,month,1); return date;
+  }
+  function render() {
+    const today = todayISO();
+    const sorted = sortedRecords();
+    const latest = sorted[0];
+    const next = latest ? dateISO(new Date(dayValue(latest.startDate) + CYCLE_DAYS * DAY)) : '';
+    byId('periodMonth').textContent = viewYear + ' / ' + String(viewMonth+1).padStart(2,'0');
+    const currentMonth = today.slice(0,7);
+    const viewedMonth = String(viewYear).padStart(4,'0') + '-' + String(viewMonth+1).padStart(2,'0');
+    byId('periodNextMonth').disabled = viewedMonth >= currentMonth;
+    byId('periodPrevMonth').disabled = viewYear <= 1 && viewMonth === 0;
+    const calendar = byId('periodCalendar'); calendar.replaceChildren();
+    const first = monthStart(viewYear,viewMonth);
+    const offset = (first.getUTCDay()+6)%7;
+    const last = monthStart(viewYear,viewMonth+1); last.setUTCDate(0);
+    for (let empty=0;empty<offset;empty++) { const blank=document.createElement('span'); blank.setAttribute('aria-hidden','true'); calendar.appendChild(blank); }
+    for (let day=1;day<=last.getUTCDate();day++) {
+      const date = monthStart(viewYear,viewMonth); date.setUTCDate(day);
+      const iso = dateISO(date);
+      const button = document.createElement('button');
+      button.type='button'; button.textContent=String(day); button.dataset.date=iso; button.disabled=iso>today;
+      button.setAttribute('aria-label',label(iso)); button.setAttribute('aria-pressed',String(iso===selectedDate));
+      if (iso===today) button.setAttribute('aria-current','date');
+      const actual = sorted.some(record => {
+        const end = record.endDate || (latest && record.startDate===latest.startDate ? today : record.startDate);
+        return iso>=record.startDate && iso<=end;
+      });
+      if (actual) button.classList.add('period-actual');
+      if (iso===next) button.classList.add('period-estimated');
+      button.addEventListener('click',() => { if (button.disabled || dayValue(iso)===null || iso>todayISO()) return; selectedDate=iso; feedback(''); render(); });
+      calendar.appendChild(button);
+    }
+    byId('periodSelectedDate').textContent=label(selectedDate);
+    byId('periodSummary').textContent=latest && !latest.endDate ? '今天第 ' + (Math.round((dayValue(today)-dayValue(latest.startDate))/DAY)+1) + ' 天' : '';
+    byId('periodPrediction').textContent=next ? '下次預估 ' + next.slice(5).replace('-','/') + (next<=today ? ' · 日期已到' : '') : '';
+    byId('periodTodayButton').textContent=selectedDate===today ? '今天經期來了' : '這天經期來了';
+  }
+  function load() {
+    try {
+      const raw=window.localStorage.getItem(KEY);
+      if (raw!==null) {
+        const parsed=JSON.parse(raw);
+        const records=Array.isArray(parsed) ? parsed : parsed && parsed.version===1 ? parsed.records : null;
+        if (!Array.isArray(records) || !records.every(validRecord)) throw new Error('Invalid local diary');
+        const unique=new Map(); records.forEach(record=>unique.set(record.startDate,{startDate:record.startDate,endDate:record.endDate}));
+        data={version:1,cycleDays:CYCLE_DAYS,records:Array.from(unique.values())};
+      } else data={version:1,cycleDays:CYCLE_DAYS,records:[]};
+      readError=false;
+    } catch (_) { readError=true; feedback('無法讀取本機紀錄。',true); }
+    render();
+  }
+  function persist(records) {
+    if (readError) { feedback('紀錄無法讀取，尚未保存。',true); return; }
+    if (!records.every(validRecord)) { feedback('日期無效，尚未保存。',true); return; }
+    const next={version:1,cycleDays:CYCLE_DAYS,records};
+    try { window.localStorage.setItem(KEY,JSON.stringify(next)); }
+    catch (_) { feedback('這個瀏覽器無法儲存，尚未保存。',true); return; }
+    data=next; render(); feedback('已記錄。');
+  }
+  byId('periodTodayButton').addEventListener('click',()=>{
+    if (dayValue(selectedDate)===null || selectedDate>todayISO()) { feedback('日期無效。',true); return; }
+    const existing=data.records.find(record=>record.startDate===selectedDate);
+    persist(data.records.filter(record=>record.startDate!==selectedDate).concat({startDate:selectedDate,endDate:existing?existing.endDate:''}));
+  });
+  byId('periodEndButton').addEventListener('click',()=>{
+    if (dayValue(selectedDate)===null || selectedDate>todayISO()) { feedback('日期無效。',true); return; }
+    const open=sortedRecords().find(record=>!record.endDate && record.startDate<=selectedDate);
+    if (!open) { feedback('還沒有可結束的紀錄。',true); return; }
+    persist(data.records.map(record=>record.startDate===open.startDate?{startDate:record.startDate,endDate:selectedDate}:record));
+  });
+  byId('periodPrevMonth').addEventListener('click',()=>{
+    if (byId('periodPrevMonth').disabled) return;
+    const previous=monthStart(viewYear,viewMonth-1); viewYear=previous.getUTCFullYear(); viewMonth=previous.getUTCMonth(); render();
+  });
+  byId('periodNextMonth').addEventListener('click',()=>{
+    if (byId('periodNextMonth').disabled) return;
+    const next=monthStart(viewYear,viewMonth+1);
+    if (dateISO(next).slice(0,7)>todayISO().slice(0,7)) return;
+    viewYear=next.getUTCFullYear(); viewMonth=next.getUTCMonth(); render();
+  });
+  window.addEventListener('storage',event=>{if(event.key===KEY||event.key===null)load();});
+  load();
+})();
+
+
   </script>
 </body>
 </html>

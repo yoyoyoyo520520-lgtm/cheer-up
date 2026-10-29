@@ -1,0 +1,7 @@
+素材說明
+
+photo-ikea-20261025.jpg：使用者提供的 IKEA 合照，原檔保留，未修改照片內容。
+scrapbook-stickers.png：使用內建 image_gen 產生的透明小狗／雪人貼紙圖集，網站以 CSS 顯示各個貼紙。
+
+最終生成提示詞：
+Use case: illustration-story. Asset type: a single transparent 2-by-2 sticker atlas for a warm personal scrapbook website. Create four charming original hand-drawn paper-sticker characters, each isolated within its own equal square quadrant with generous transparent padding and no overlap between quadrants: top left a small white beagle puppy with floppy black ears, tiny dot eyes, round black nose and a pink heart held in its paws; top right a friendly little snowman with carrot nose, twig arms, mint scarf and a happy wave; bottom left the same puppy resting its chin on a folded lilac note; bottom right the same snowman holding a little butter-yellow star. Mood: comforting, cute, gentle rather than childish clutter. Style: clean dark-brown ink outlines, soft flat pastel fills, very light colored-pencil texture, white die-cut sticker rims. Palette matches cream paper, coral pink, pale lilac, mint green and butter yellow. Every character must fit fully within its quadrant; the center horizontal and vertical gutters must stay empty and transparent so the quadrants can be displayed independently using CSS. No text, no letters, no logo, no watermark, no background scene, no checkerboard painted into the image. Actual transparent background.
