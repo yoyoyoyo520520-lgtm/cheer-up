@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#fbf5ed">
-  <meta name="cheer-version" content="4.0">
+  <meta name="cheer-version" content="4.1">
   <meta name="description" content="一起走過的地方，想去的下一站，還有想好好聽你說的每一種心情。">
   <title>一起走過的路，慢慢變長。｜融的小小關心所</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -670,7 +670,10 @@
         element.src=url.toString();document.head.appendChild(element);
       });
     }
-    function getConfirmation(requestId,kind='mood'){return requestBackend({action:kind==='place'?'place_status':'status',id:requestId})}
+    function getConfirmation(requestId,kind='mood'){
+      const action=kind==='place'?'place_status':kind==='period'?'period_status':'status';
+      return requestBackend({action,id:requestId});
+    }
     const sleep=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
     async function waitForConfirmation(requestId,kind='mood'){
       for(let attempt=0;attempt<7;attempt++){
@@ -861,14 +864,18 @@
     loadPlaces();
 (() => {
   'use strict';
-  const KEY = 'kk-period-diary-v1';
   const DAY = 86400000;
   const CYCLE_DAYS = 28;
   const byId = id => document.getElementById(id);
   const ids = ['periodPrevMonth','periodNextMonth','periodMonth','periodCalendar','periodSelectedDate','periodSummary','periodPrediction','periodTodayButton','periodEndButton','periodFeedback'];
   if (ids.some(id => !byId(id))) return;
-  let data = {version:1,cycleDays:CYCLE_DAYS,records:[]};
-  let readError = false;
+  let data = {revision:0,cycleDays:CYCLE_DAYS,records:[]};
+  let hasData = false;
+  let sending = false;
+  let readEpoch = 0;
+  let minimumRevision = 0;
+  const pendingIds = new Map();
+
   function todayISO() {
     const parts = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
     const value = type => parts.find(part => part.type === type).value;
@@ -905,10 +912,11 @@
     const latest = sorted[0];
     const next = latest ? dateISO(new Date(dayValue(latest.startDate) + CYCLE_DAYS * DAY)) : '';
     byId('periodMonth').textContent = viewYear + ' / ' + String(viewMonth+1).padStart(2,'0');
-    const currentMonth = today.slice(0,7);
     const viewedMonth = String(viewYear).padStart(4,'0') + '-' + String(viewMonth+1).padStart(2,'0');
-    byId('periodNextMonth').disabled = viewedMonth >= currentMonth;
-    byId('periodPrevMonth').disabled = viewYear <= 1 && viewMonth === 0;
+    byId('periodNextMonth').disabled = sending || viewedMonth >= today.slice(0,7);
+    byId('periodPrevMonth').disabled = sending || (viewYear <= 1 && viewMonth === 0);
+    byId('periodTodayButton').disabled = sending || !hasData;
+    byId('periodEndButton').disabled = sending || !hasData;
     const calendar = byId('periodCalendar'); calendar.replaceChildren();
     const first = monthStart(viewYear,viewMonth);
     const offset = (first.getUTCDay()+6)%7;
@@ -918,7 +926,7 @@
       const date = monthStart(viewYear,viewMonth); date.setUTCDate(day);
       const iso = dateISO(date);
       const button = document.createElement('button');
-      button.type='button'; button.textContent=String(day); button.dataset.date=iso; button.disabled=iso>today;
+      button.type='button'; button.textContent=String(day); button.dataset.date=iso; button.disabled=sending || iso>today;
       button.setAttribute('aria-label',label(iso)); button.setAttribute('aria-pressed',String(iso===selectedDate));
       if (iso===today) button.setAttribute('aria-current','date');
       const actual = sorted.some(record => {
@@ -927,7 +935,7 @@
       });
       if (actual) button.classList.add('period-actual');
       if (iso===next) button.classList.add('period-estimated');
-      button.addEventListener('click',() => { if (button.disabled || dayValue(iso)===null || iso>todayISO()) return; selectedDate=iso; feedback(''); render(); });
+      button.addEventListener('click',() => { if (sending || button.disabled || dayValue(iso)===null || iso>todayISO()) return; selectedDate=iso; feedback(''); render(); });
       calendar.appendChild(button);
     }
     byId('periodSelectedDate').textContent=label(selectedDate);
@@ -935,53 +943,83 @@
     byId('periodPrediction').textContent=next ? '下次預估 ' + next.slice(5).replace('-','/') + (next<=today ? ' · 日期已到' : '') : '';
     byId('periodTodayButton').textContent=selectedDate===today ? '今天經期來了' : '這天經期來了';
   }
-  function load() {
+  function snapshotSignature(records) {
+    return JSON.stringify(records.slice().sort((a,b)=>a.startDate.localeCompare(b.startDate)));
+  }
+  function readSnapshot(result) {
+    if (!result || result.ok!==true || result.cycleDays!==CYCLE_DAYS || typeof result.version!=='string' || !result.version || !Number.isSafeInteger(result.revision) || result.revision<0 || !Array.isArray(result.records) || !result.records.every(validRecord)) throw new Error('INVALID_PERIOD_RESPONSE');
+    const starts = new Set();
+    const records = result.records.map(record=>{
+      if (starts.has(record.startDate)) throw new Error('INVALID_PERIOD_RESPONSE');
+      starts.add(record.startDate);
+      return {startDate:record.startDate,endDate:record.endDate};
+    });
+    if (result.revision<minimumRevision || (hasData && result.revision<data.revision)) throw new Error('STALE_PERIOD_RESPONSE');
+    if (hasData && result.revision===data.revision && snapshotSignature(records)!==snapshotSignature(data.records)) throw new Error('INCONSISTENT_PERIOD_RESPONSE');
+    return {revision:result.revision,cycleDays:CYCLE_DAYS,records};
+  }
+  function containsAction(snapshot,action,date) {
+    return snapshot.records.some(record=>action==='period_start' ? record.startDate===date : record.endDate===date);
+  }
+  async function loadShared(options={}) {
+    if (sending && !options.afterWrite) return false;
+    const epoch=++readEpoch;
     try {
-      const raw=window.localStorage.getItem(KEY);
-      if (raw!==null) {
-        const parsed=JSON.parse(raw);
-        const records=Array.isArray(parsed) ? parsed : parsed && parsed.version===1 ? parsed.records : null;
-        if (!Array.isArray(records) || !records.every(validRecord)) throw new Error('Invalid local diary');
-        const unique=new Map(); records.forEach(record=>unique.set(record.startDate,{startDate:record.startDate,endDate:record.endDate}));
-        data={version:1,cycleDays:CYCLE_DAYS,records:Array.from(unique.values())};
-      } else data={version:1,cycleDays:CYCLE_DAYS,records:[]};
-      readError=false;
-    } catch (_) { readError=true; feedback('無法讀取本機紀錄。',true); }
-    render();
+      const result=await requestBackend({action:'period'});
+      if (epoch!==readEpoch || (sending && !options.afterWrite)) return false;
+      const snapshot=readSnapshot(result);
+      if (options.action && !containsAction(snapshot,options.action,options.date)) throw new Error('PERIOD_NOT_UPDATED');
+      data=snapshot; hasData=true; minimumRevision=Math.max(minimumRevision,snapshot.revision);
+      feedback(''); render(); return true;
+    } catch (_) {
+      if (epoch===readEpoch) { feedback('無法讀取紀錄。',true); render(); }
+      return false;
+    }
   }
-  function persist(records) {
-    if (readError) { feedback('紀錄無法讀取，尚未保存。',true); return; }
-    if (!records.every(validRecord)) { feedback('日期無效，尚未保存。',true); return; }
-    const next={version:1,cycleDays:CYCLE_DAYS,records};
-    try { window.localStorage.setItem(KEY,JSON.stringify(next)); }
-    catch (_) { feedback('這個瀏覽器無法儲存，尚未保存。',true); return; }
-    data=next; render(); feedback('已記錄。');
+  function saveError(error) {
+    if (error && error.code==='PERIOD_INVALID_DATE') return '日期無效。';
+    if (error && error.code==='PERIOD_NO_OPEN_RECORD') return '還沒有可結束的紀錄。';
+    if (error && error.code==='SPREADSHEET_NOT_CONFIGURED') return '無法連上紀錄。';
+    return '尚未確認保存。';
   }
-  byId('periodTodayButton').addEventListener('click',()=>{
-    if (dayValue(selectedDate)===null || selectedDate>todayISO()) { feedback('日期無效。',true); return; }
-    const existing=data.records.find(record=>record.startDate===selectedDate);
-    persist(data.records.filter(record=>record.startDate!==selectedDate).concat({startDate:selectedDate,endDate:existing?existing.endDate:''}));
-  });
-  byId('periodEndButton').addEventListener('click',()=>{
-    if (dayValue(selectedDate)===null || selectedDate>todayISO()) { feedback('日期無效。',true); return; }
-    const open=sortedRecords().find(record=>!record.endDate && record.startDate<=selectedDate);
-    if (!open) { feedback('還沒有可結束的紀錄。',true); return; }
-    persist(data.records.map(record=>record.startDate===open.startDate?{startDate:record.startDate,endDate:selectedDate}:record));
-  });
+  async function saveRecord(action) {
+    if (sending) return;
+    if (!hasData) { feedback('無法讀取紀錄。',true); return; }
+    const date=selectedDate;
+    if (dayValue(date)===null || date>todayISO()) { feedback('日期無效。',true); return; }
+    const key=action+'|'+date;
+    const requestId=pendingIds.get(key) || newRequestId(); pendingIds.set(key,requestId);
+    sending=true; readEpoch++; feedback(''); render();
+    try {
+      try {
+        await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action,date,requestId}),cache:'no-store'});
+      } catch (_) {}
+      const ack=await waitForConfirmation(requestId,'period');
+      if (!ack || ack.ok!==true || ack.received!==true) throw new Error('PERIOD_NOT_CONFIRMED');
+      if (Number.isSafeInteger(ack.revision) && ack.revision>=0) minimumRevision=Math.max(minimumRevision,ack.revision);
+      if (await loadShared({afterWrite:true,action,date})) pendingIds.delete(key);
+    } catch (error) { feedback(saveError(error),true); }
+    finally { sending=false; render(); }
+  }
+  byId('periodTodayButton').addEventListener('click',()=>saveRecord('period_start'));
+  byId('periodEndButton').addEventListener('click',()=>saveRecord('period_end'));
   byId('periodPrevMonth').addEventListener('click',()=>{
-    if (byId('periodPrevMonth').disabled) return;
+    if (sending || byId('periodPrevMonth').disabled) return;
     const previous=monthStart(viewYear,viewMonth-1); viewYear=previous.getUTCFullYear(); viewMonth=previous.getUTCMonth(); render();
   });
   byId('periodNextMonth').addEventListener('click',()=>{
-    if (byId('periodNextMonth').disabled) return;
+    if (sending || byId('periodNextMonth').disabled) return;
     const next=monthStart(viewYear,viewMonth+1);
     if (dateISO(next).slice(0,7)>todayISO().slice(0,7)) return;
     viewYear=next.getUTCFullYear(); viewMonth=next.getUTCMonth(); render();
   });
-  window.addEventListener('storage',event=>{if(event.key===KEY||event.key===null)load();});
-  load();
+  const refresh=()=>{if(document.visibilityState!=='hidden' && !sending)loadShared();};
+  window.addEventListener('focus',refresh);
+  document.addEventListener('visibilitychange',refresh);
+  const poll=window.setInterval(refresh,30000);
+  window.addEventListener('beforeunload',()=>window.clearInterval(poll));
+  render(); loadShared();
 })();
-
 
   </script>
 </body>
